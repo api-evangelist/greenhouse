@@ -12,12 +12,12 @@ apis:
       - url: ' https://developers.greenhouse.io/assessment.html#introduction'
         type: Documentation
     description: >-
-      Greenhouse integrates with many candidate testing platforms, including
-      code testing, video interviewing, personality testing, and more. Weve
-      created the Assessment Partner API to allow our customers to seamlessly
-      integrate our Partners assessments into their Greenhouse interview
-      workflow. This document outlines the end-user experience with the
-      integration and the technical details of how to implement it. 
+      Greenhouse integrates with many candidate testing platforms, including code
+      testing, video interviewing, personality testing, and more. Weve created the
+      Assessment Partner API to allow our customers to seamlessly integrate our Partners
+      assessments into their Greenhouse interview workflow. This document outlines
+      the end-user experience with the integration and the technical details of how
+      to implement it.
 name: Greenhouse
 tags:
   - Candidates
@@ -29,12 +29,11 @@ created: '2025-01-07'
 modified: '2026-03-16'
 position: Consumer
 description: >-
-  Greenhouse integrates with many candidate testing platforms, including code
-  testing, video interviewing, personality testing, and more. Weve created the
-  Assessment Partner API to allow our customers to seamlessly integrate our
-  Partners assessments into their Greenhouse interview workflow. This document
-  outlines the end-user experience with the integration and the technical
-  details of how to implement it. 
+  Greenhouse integrates with many candidate testing platforms, including code testing,
+  video interviewing, personality testing, and more. Weve created the Assessment Partner
+  API to allow our customers to seamlessly integrate our Partners assessments into
+  their Greenhouse interview workflow. This document outlines the end-user experience
+  with the integration and the technical details of how to implement it.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
