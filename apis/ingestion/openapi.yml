@@ -1,0 +1,81 @@
+openapi: 3.0.3
+info:
+  title: Greenhouse Candidate Ingestion API
+  description: >-
+    The Ingestion API enables sourcing partners to submit prospects and candidates to
+    Greenhouse. Supports OAuth 2.0 for users with accounts in both systems and HTTP
+    Basic Auth for partner submissions.
+  version: '1.0'
+  contact:
+    name: Greenhouse Developer Support
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+servers:
+  - url: https://api.greenhouse.io/v1/partner
+    description: Production
+security:
+  - basicAuth: []
+  - oauth2: []
+tags:
+  - name: Candidates
+  - name: Users
+  - name: Jobs
+  - name: Tracking
+  - name: Prospects
+paths:
+  /candidates:
+    get:
+      tags: [Candidates]
+      summary: Retrieve candidate
+      description: Retrieve a candidate's data subject to permission restrictions.
+      responses:
+        '200':
+          description: Candidate data
+    post:
+      tags: [Candidates]
+      summary: Submit candidate
+      description: Submit a new candidate or prospect to Greenhouse.
+      responses:
+        '201':
+          description: Candidate submitted
+  /current_user:
+    get:
+      tags: [Users]
+      summary: Get current user
+      responses:
+        '200':
+          description: Authenticated user details
+  /jobs:
+    get:
+      tags: [Jobs]
+      summary: List jobs
+      description: Retrieve jobs accessible to the current user.
+      responses:
+        '200':
+          description: Jobs accessible to user
+  /tracking_link:
+    post:
+      tags: [Tracking]
+      summary: Generate tracking link
+      description: Generate a tracking link for a specific job.
+      responses:
+        '200':
+          description: Tracking link created
+  /prospect_pools:
+    get:
+      tags: [Prospects]
+      summary: List prospect pools
+      responses:
+        '200':
+          description: Prospect pools and stages
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.greenhouse.io/oauth/authorize
+          tokenUrl: https://api.greenhouse.io/oauth/token
+          scopes: {}

@@ -1,0 +1,59 @@
+openapi: 3.0.3
+info:
+  title: Greenhouse Onboarding API
+  description: >-
+    Greenhouse Onboarding only supports GraphQL; there is no traditional REST API. All
+    requests are POST to the single /graphql endpoint with JSON payloads containing
+    GraphQL queries or mutations. Authentication uses HTTP Basic Auth with an Access
+    Key (username) and Secret Key (password).
+  version: '1.0'
+  contact:
+    name: Greenhouse Developer Support
+    url: https://developers.greenhouse.io/gho.html
+servers:
+  - url: https://onboarding-api.greenhouse.io
+    description: Production
+security:
+  - basicAuth: []
+paths:
+  /graphql:
+    post:
+      summary: Execute GraphQL query or mutation
+      description: >-
+        Single GraphQL endpoint supporting employee, employees, department, departments,
+        location, locations, customField, customFields, team, teams, and rateLimit
+        queries; and mutations including updateEmployeeProfile, addPendingHire,
+        addDepartment, updateDepartment, deleteDepartment, addLocation, updateLocation,
+        and deleteLocation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                variables:
+                  type: object
+                operationName:
+                  type: string
+      responses:
+        '200':
+          description: GraphQL response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                  errors:
+                    type: array
+                    items:
+                      type: object
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
