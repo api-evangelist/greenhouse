@@ -34,7 +34,7 @@ apis:
       - type: Documentation
         url: https://developers.greenhouse.io/harvest.html
       - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/greenhouse/refs/heads/main/apis/harvest/openapi.yml
+        url: https://raw.githubusercontent.com/api-evangelist/greenhouse/refs/heads/main/openapi/greenhouse-harvest-openapi.yml
   - aid: greenhouse:job-board
     name: Greenhouse Job Board API
     description: >-
@@ -49,7 +49,7 @@ apis:
       - type: Documentation
         url: https://developers.greenhouse.io/job-board.html
       - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/greenhouse/refs/heads/main/apis/job-board/openapi.yml
+        url: https://raw.githubusercontent.com/api-evangelist/greenhouse/refs/heads/main/openapi/greenhouse-job-board-openapi.yml
   - aid: greenhouse:ingestion
     name: Greenhouse Candidate Ingestion API
     description: >-
@@ -64,7 +64,7 @@ apis:
       - type: Documentation
         url: https://developers.greenhouse.io/candidate-ingestion.html
       - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/greenhouse/refs/heads/main/apis/ingestion/openapi.yml
+        url: https://raw.githubusercontent.com/api-evangelist/greenhouse/refs/heads/main/openapi/greenhouse-ingestion-openapi.yml
   - aid: greenhouse:onboarding
     name: Greenhouse Onboarding API
     description: >-
@@ -79,7 +79,7 @@ apis:
       - type: Documentation
         url: https://developers.greenhouse.io/gho.html
       - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/greenhouse/refs/heads/main/apis/onboarding/openapi.yml
+        url: https://raw.githubusercontent.com/api-evangelist/greenhouse/refs/heads/main/openapi/greenhouse-onboarding-openapi.yml
   - aid: greenhouse:assessment
     name: Greenhouse Assessment API
     description: >-

@@ -27,7 +27,7 @@ The Harvest API provides programmatic access to Greenhouse Recruiting data, incl
 - **Human URL:** https://developers.greenhouse.io/harvest.html
 - **Base URL:** https://harvest.greenhouse.io/v1
 - [Documentation](https://developers.greenhouse.io/harvest.html)
-- [OpenAPI](apis/harvest/openapi.yml)
+- [OpenAPI](openapi/greenhouse-harvest-openapi.yml)
 
 ### Greenhouse Job Board API
 The Job Board API enables building careers pages with custom look and feel, retrieving jobs, offices, departments, sections, education reference data, and submitting applications.
@@ -35,7 +35,7 @@ The Job Board API enables building careers pages with custom look and feel, retr
 - **Human URL:** https://developers.greenhouse.io/job-board.html
 - **Base URL:** https://boards-api.greenhouse.io/v1/boards
 - [Documentation](https://developers.greenhouse.io/job-board.html)
-- [OpenAPI](apis/job-board/openapi.yml)
+- [OpenAPI](openapi/greenhouse-job-board-openapi.yml)
 
 ### Greenhouse Candidate Ingestion API
 The Ingestion API enables sourcing partners to submit prospects and candidates to Greenhouse and to retrieve job and prospect pool information.
@@ -43,7 +43,7 @@ The Ingestion API enables sourcing partners to submit prospects and candidates t
 - **Human URL:** https://developers.greenhouse.io/candidate-ingestion.html
 - **Base URL:** https://api.greenhouse.io/v1/partner
 - [Documentation](https://developers.greenhouse.io/candidate-ingestion.html)
-- [OpenAPI](apis/ingestion/openapi.yml)
+- [OpenAPI](openapi/greenhouse-ingestion-openapi.yml)
 
 ### Greenhouse Onboarding API
 A GraphQL API for Greenhouse Onboarding. Provides queries and mutations for employees, departments, locations, custom fields, teams, and pending hires.
@@ -51,7 +51,7 @@ A GraphQL API for Greenhouse Onboarding. Provides queries and mutations for empl
 - **Human URL:** https://developers.greenhouse.io/gho.html
 - **Base URL:** https://onboarding-api.greenhouse.io/graphql
 - [Documentation](https://developers.greenhouse.io/gho.html)
-- [OpenAPI](apis/onboarding/openapi.yml)
+- [OpenAPI](openapi/greenhouse-onboarding-openapi.yml)
 
 ### Greenhouse Assessment API
 The Assessment Partner API enables assessment platforms (code testing, video interviewing, personality testing) to seamlessly integrate with the Greenhouse interview workflow.
