@@ -1,0 +1,657 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Greenhouse Harvest API
+  description: The Harvest API provides programmatic access to Greenhouse Recruiting data, including candidates, applications,
+    jobs, departments, offices, and users. Authentication uses HTTP Basic Auth with an API token.
+  tags:
+  - Greenhouse
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: greenhouse
+    baseUri: https://harvest.greenhouse.io/v1
+    description: Greenhouse Harvest API HTTP API.
+    authentication:
+      type: basic
+      username: '{{GREENHOUSE_USERNAME}}'
+      password: '{{GREENHOUSE_PASSWORD}}'
+    resources:
+    - name: candidates
+      path: /candidates
+      operations:
+      - name: get-candidates
+        method: GET
+        description: List candidates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post-candidates
+        method: POST
+        description: Create candidate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: candidates-id
+      path: /candidates/{id}
+      operations:
+      - name: get-candidates-id
+        method: GET
+        description: Retrieve candidate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: patch-candidates-id
+        method: PATCH
+        description: Update candidate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-candidates-id
+        method: DELETE
+        description: Delete candidate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: applications
+      path: /applications
+      operations:
+      - name: get-applications
+        method: GET
+        description: List applications
+        inputParameters:
+        - name: job_id
+          in: query
+          type: integer
+        - name: status
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: applications-id
+      path: /applications/{id}
+      operations:
+      - name: get-applications-id
+        method: GET
+        description: Retrieve application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: patch-applications-id
+        method: PATCH
+        description: Update application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: applications-id-advance
+      path: /applications/{id}/advance
+      operations:
+      - name: post-applications-id-advance
+        method: POST
+        description: Advance application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: applications-id-hire
+      path: /applications/{id}/hire
+      operations:
+      - name: post-applications-id-hire
+        method: POST
+        description: Hire application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: applications-id-reject
+      path: /applications/{id}/reject
+      operations:
+      - name: post-applications-id-reject
+        method: POST
+        description: Reject application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: jobs
+      path: /jobs
+      operations:
+      - name: get-jobs
+        method: GET
+        description: List jobs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: jobs-id
+      path: /jobs/{id}
+      operations:
+      - name: get-jobs-id
+        method: GET
+        description: Retrieve job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: patch-jobs-id
+        method: PATCH
+        description: Update job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: departments
+      path: /departments
+      operations:
+      - name: get-departments
+        method: GET
+        description: List departments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: offices
+      path: /offices
+      operations:
+      - name: get-offices
+        method: GET
+        description: List offices
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: offices-id
+      path: /offices/{id}
+      operations:
+      - name: get-offices-id
+        method: GET
+        description: Retrieve office
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: users
+      path: /users
+      operations:
+      - name: get-users
+        method: GET
+        description: List users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: users-id
+      path: /users/{id}
+      operations:
+      - name: get-users-id
+        method: GET
+        description: Retrieve user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: patch-users-id
+        method: PATCH
+        description: Update user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: greenhouse-rest
+    description: REST adapter for Greenhouse Harvest API.
+    resources:
+    - path: /candidates
+      name: get-candidates
+      operations:
+      - method: GET
+        name: get-candidates
+        description: List candidates
+        call: greenhouse.get-candidates
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /candidates
+      name: post-candidates
+      operations:
+      - method: POST
+        name: post-candidates
+        description: Create candidate
+        call: greenhouse.post-candidates
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /candidates/{id}
+      name: get-candidates-id
+      operations:
+      - method: GET
+        name: get-candidates-id
+        description: Retrieve candidate
+        call: greenhouse.get-candidates-id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /candidates/{id}
+      name: patch-candidates-id
+      operations:
+      - method: PATCH
+        name: patch-candidates-id
+        description: Update candidate
+        call: greenhouse.patch-candidates-id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /candidates/{id}
+      name: delete-candidates-id
+      operations:
+      - method: DELETE
+        name: delete-candidates-id
+        description: Delete candidate
+        call: greenhouse.delete-candidates-id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /applications
+      name: get-applications
+      operations:
+      - method: GET
+        name: get-applications
+        description: List applications
+        call: greenhouse.get-applications
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /applications/{id}
+      name: get-applications-id
+      operations:
+      - method: GET
+        name: get-applications-id
+        description: Retrieve application
+        call: greenhouse.get-applications-id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /applications/{id}
+      name: patch-applications-id
+      operations:
+      - method: PATCH
+        name: patch-applications-id
+        description: Update application
+        call: greenhouse.patch-applications-id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /applications/{id}/advance
+      name: post-applications-id-advance
+      operations:
+      - method: POST
+        name: post-applications-id-advance
+        description: Advance application
+        call: greenhouse.post-applications-id-advance
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /applications/{id}/hire
+      name: post-applications-id-hire
+      operations:
+      - method: POST
+        name: post-applications-id-hire
+        description: Hire application
+        call: greenhouse.post-applications-id-hire
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /applications/{id}/reject
+      name: post-applications-id-reject
+      operations:
+      - method: POST
+        name: post-applications-id-reject
+        description: Reject application
+        call: greenhouse.post-applications-id-reject
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /jobs
+      name: get-jobs
+      operations:
+      - method: GET
+        name: get-jobs
+        description: List jobs
+        call: greenhouse.get-jobs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /jobs/{id}
+      name: get-jobs-id
+      operations:
+      - method: GET
+        name: get-jobs-id
+        description: Retrieve job
+        call: greenhouse.get-jobs-id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /jobs/{id}
+      name: patch-jobs-id
+      operations:
+      - method: PATCH
+        name: patch-jobs-id
+        description: Update job
+        call: greenhouse.patch-jobs-id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /departments
+      name: get-departments
+      operations:
+      - method: GET
+        name: get-departments
+        description: List departments
+        call: greenhouse.get-departments
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /offices
+      name: get-offices
+      operations:
+      - method: GET
+        name: get-offices
+        description: List offices
+        call: greenhouse.get-offices
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /offices/{id}
+      name: get-offices-id
+      operations:
+      - method: GET
+        name: get-offices-id
+        description: Retrieve office
+        call: greenhouse.get-offices-id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /users
+      name: get-users
+      operations:
+      - method: GET
+        name: get-users
+        description: List users
+        call: greenhouse.get-users
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /users/{id}
+      name: get-users-id
+      operations:
+      - method: GET
+        name: get-users-id
+        description: Retrieve user
+        call: greenhouse.get-users-id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /users/{id}
+      name: patch-users-id
+      operations:
+      - method: PATCH
+        name: patch-users-id
+        description: Update user
+        call: greenhouse.patch-users-id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: greenhouse-mcp
+    transport: http
+    description: MCP adapter for Greenhouse Harvest API for AI agent use.
+    tools:
+    - name: get-candidates
+      description: List candidates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: greenhouse.get-candidates
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-candidates
+      description: Create candidate
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: greenhouse.post-candidates
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-candidates-id
+      description: Retrieve candidate
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: greenhouse.get-candidates-id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: patch-candidates-id
+      description: Update candidate
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: greenhouse.patch-candidates-id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-candidates-id
+      description: Delete candidate
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: greenhouse.delete-candidates-id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-applications
+      description: List applications
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: greenhouse.get-applications
+      with:
+        job_id: tools.job_id
+        status: tools.status
+      inputParameters:
+      - name: job_id
+        type: integer
+        description: job_id
+      - name: status
+        type: string
+        description: status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-applications-id
+      description: Retrieve application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: greenhouse.get-applications-id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: patch-applications-id
+      description: Update application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: greenhouse.patch-applications-id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-applications-id-advance
+      description: Advance application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: greenhouse.post-applications-id-advance
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-applications-id-hire
+      description: Hire application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: greenhouse.post-applications-id-hire
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-applications-id-reject
+      description: Reject application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: greenhouse.post-applications-id-reject
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-jobs
+      description: List jobs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: greenhouse.get-jobs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-jobs-id
+      description: Retrieve job
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: greenhouse.get-jobs-id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: patch-jobs-id
+      description: Update job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: greenhouse.patch-jobs-id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-departments
+      description: List departments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: greenhouse.get-departments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-offices
+      description: List offices
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: greenhouse.get-offices
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-offices-id
+      description: Retrieve office
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: greenhouse.get-offices-id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-users
+      description: List users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: greenhouse.get-users
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-users-id
+      description: Retrieve user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: greenhouse.get-users-id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: patch-users-id
+      description: Update user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: greenhouse.patch-users-id
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    GREENHOUSE_USERNAME: GREENHOUSE_USERNAME
+    GREENHOUSE_PASSWORD: GREENHOUSE_PASSWORD
