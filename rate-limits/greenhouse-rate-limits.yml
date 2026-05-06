@@ -4,122 +4,61 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Greenhouse
 providerId: greenhouse
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
+  - Rate Limiting
   - ATS
   - Recruiting
-  - Candidates
-  - Jobs
-  - Onboarding
   - HR
-  - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Greenhouse API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
+description: Greenhouse Harvest API rate limits use a rolling 10-second window. The actual
+  per-window cap is communicated dynamically via the X-RateLimit-Limit response header (it varies
+  by approved partner / customer-built integration). When exceeded, the API returns HTTP 429
+  with X-RateLimit-Reset (Unix timestamp) and Retry-After (seconds). Other Greenhouse APIs (Job
+  Board, Candidate Ingestion, Onboarding, Webhooks) have their own documented limits with the
+  same 429 + Retry-After signaling.
+sources:
+  - https://developers.greenhouse.io/harvest.html
+  - https://developers.greenhouse.io/job-board.html
+  - https://developers.greenhouse.io/candidate-ingestion.html
 headers:
   limit: X-RateLimit-Limit
   remaining: X-RateLimit-Remaining
   reset: X-RateLimit-Reset
   retryAfter: Retry-After
-  policy: RateLimit-Policy
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
+  - name: Harvest API — rolling 10-second window
     scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Greenhouse Harvest API
-      - Greenhouse Job Board API
-      - Greenhouse Candidate Ingestion API
-      - Greenhouse Onboarding API
-      - Greenhouse Assessment API
-      - Greenhouse Audit Log API
-      - Greenhouse Recruiting Webhooks
-      - Greenhouse Onboarding Webhooks
-  - tier: free
-    name: Free Tier Monthly Quota
+    metric: requests_per_period
+    limit: 'value of X-RateLimit-Limit header (per 10 seconds)'
+    notes: Limit value is set per approved partner / customer integration and exposed in the
+      X-RateLimit-Limit header. Default ranges around tens of requests per 10 seconds.
+  - name: Job Board API
     scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Greenhouse Harvest API
-      - Greenhouse Job Board API
-      - Greenhouse Candidate Ingestion API
-      - Greenhouse Onboarding API
-      - Greenhouse Assessment API
-      - Greenhouse Audit Log API
-      - Greenhouse Recruiting Webhooks
-      - Greenhouse Onboarding Webhooks
-  - tier: professional
-    name: Professional Tier Default
+    metric: varies
+    limit: 'see developer docs'
+    notes: Job Board API has its own published limit; same 429 + Retry-After contract.
+  - name: Candidate Ingestion API
     scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Greenhouse Harvest API
-      - Greenhouse Job Board API
-      - Greenhouse Candidate Ingestion API
-      - Greenhouse Onboarding API
-      - Greenhouse Assessment API
-      - Greenhouse Audit Log API
-      - Greenhouse Recruiting Webhooks
-      - Greenhouse Onboarding Webhooks
-  - tier: professional
-    name: Professional Tier Monthly Quota
+    metric: varies
+    limit: 'see developer docs'
+  - name: Onboarding API
     scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Greenhouse Harvest API
-      - Greenhouse Job Board API
-      - Greenhouse Candidate Ingestion API
-      - Greenhouse Onboarding API
-      - Greenhouse Assessment API
-      - Greenhouse Audit Log API
-      - Greenhouse Recruiting Webhooks
-      - Greenhouse Onboarding Webhooks
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Greenhouse Harvest API
-      - Greenhouse Job Board API
-      - Greenhouse Candidate Ingestion API
-      - Greenhouse Onboarding API
-      - Greenhouse Assessment API
-      - Greenhouse Audit Log API
-      - Greenhouse Recruiting Webhooks
-      - Greenhouse Onboarding Webhooks
+    metric: varies
+    limit: 'see developer docs'
 policies:
   - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+    description: When a 429 is received, sleep for the seconds value in Retry-After (or until
+      X-RateLimit-Reset Unix timestamp) before retrying. Apply jitter on additional retries.
+  - name: Header-driven throttling
+    description: Inspect X-RateLimit-Remaining on every successful response to throttle preemptively
+      before the next 429.
+  - name: Approved-partner allowance
+    description: Higher rate-limit allowances are granted to approved Greenhouse partners and
+      customer-built integrations.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

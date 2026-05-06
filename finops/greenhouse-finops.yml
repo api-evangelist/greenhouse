@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,183 +9,80 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: Greenhouse
 providerId: greenhouse
-publisherName: Greenhouse
-serviceCategory: API
+publisherName: Greenhouse Software, Inc.
+serviceCategory: Recruiting / ATS SaaS
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
+  - FinOps
+  - FOCUS
   - ATS
   - Recruiting
-  - Candidates
-  - Jobs
-  - Onboarding
   - HR
-  - FinOps
-  - Cost Management
-  - FOCUS
-description: FinOps framework definition for the Greenhouse API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+description: 'FOCUS-aligned FinOps for Greenhouse: tiered annual subscription (Core / Plus / Pro)
+  with custom pricing per customer; APIs included at no per-call charge. Cost grows with tier and
+  with employee / hiring-team count rather than with API volume.'
+sources:
+  - https://www.greenhouse.com/pricing
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Tiered Subscription
+  billingFrequency: Annual
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
-    - Tax
-    - Credit
     - Adjustment
-  chargeFrequency: Recurring
+    - Credit
 focusColumns:
   ServiceName: Greenhouse
-  ServiceCategory: Developer Tools / API
+  ServiceCategory: Recruiting / ATS SaaS
   ProviderName: Greenhouse
-  PublisherName: Greenhouse
-  InvoiceIssuerName: Greenhouse
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PublisherName: Greenhouse Software, Inc.
+  InvoiceIssuerName: Greenhouse Software, Inc.
   BillingCurrency: USD
-  ChargeCategory: Usage
+  ChargeCategory: Purchase
 meters:
+  - name: subscription_fee
+    description: Annual platform subscription fee per tier
+    unit: year
+    aggregation: sum
+    dimensions:
+      - tier
+  - name: hiring_team_seats
+    description: Hiring team seats provisioned (scoping factor for tier sizing)
+    unit: seat
+    aggregation: max
+    dimensions:
+      - team
+      - region
   - name: api_requests
-    description: Count of billable API requests
+    description: API requests across Harvest / Job Board / Candidate Ingestion / Onboarding
+      (operational metric, not directly billed)
     unit: request
     aggregation: sum
     dimensions:
       - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
+      - integration
+  - name: webhook_deliveries
+    description: Outbound webhook deliveries
+    unit: event
     aggregation: sum
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Greenhouse Harvest API
-    baseURL: https://harvest.greenhouse.io/v1
-    tags:
-      - Harvest
-      - Candidates
-      - Jobs
-      - Applications
-    serviceName: Greenhouse Harvest API
-    serviceCategory: API
-  - name: Greenhouse Job Board API
-    baseURL: https://boards-api.greenhouse.io/v1/boards
-    tags:
-      - Job Board
-      - Careers
-      - Jobs
-    serviceName: Greenhouse Job Board API
-    serviceCategory: API
-  - name: Greenhouse Candidate Ingestion API
-    baseURL: https://api.greenhouse.io/v1/partner
-    tags:
-      - Ingestion
-      - Candidates
-      - Sourcing
-    serviceName: Greenhouse Candidate Ingestion API
-    serviceCategory: API
-  - name: Greenhouse Onboarding API
-    baseURL: https://onboarding-api.greenhouse.io/graphql
-    tags:
-      - Onboarding
-      - GraphQL
-      - Employees
-    serviceName: Greenhouse Onboarding API
-    serviceCategory: API
-  - name: Greenhouse Assessment API
-    baseURL: ''
-    tags:
-      - Assessment
-      - Testing
-      - Candidates
-    serviceName: Greenhouse Assessment API
-    serviceCategory: API
-  - name: Greenhouse Audit Log API
-    baseURL: ''
-    tags:
-      - Audit
-      - Compliance
-      - Logging
-    serviceName: Greenhouse Audit Log API
-    serviceCategory: API
-  - name: Greenhouse Recruiting Webhooks
-    baseURL: ''
-    tags:
-      - Webhooks
-      - Recruiting
-      - Events
-    serviceName: Greenhouse Recruiting Webhooks
-    serviceCategory: API
-  - name: Greenhouse Onboarding Webhooks
-    baseURL: ''
-    tags:
-      - Webhooks
-      - Onboarding
-      - Events
-    serviceName: Greenhouse Onboarding Webhooks
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - event_type
+principles:
+  - name: Visibility
+    description: Use Greenhouse usage reports plus integration logs (Harvest X-RateLimit-Remaining
+      values) to understand consumption profile and pre-empt limit pressure.
+  - name: Allocation
+    description: Map hiring teams / business units to Greenhouse user groups so the annual
+      subscription can be allocated by hiring volume per division.
+  - name: Optimization
+    description: Right-size tier (Core vs Plus vs Pro) to actual hiring complexity and feature
+      need; consolidate redundant integrations to limit API and webhook fan-out; clean up
+      inactive users at renewal.
+  - name: Accountability
+    description: Designate a Talent / People-Ops owner accountable for the Greenhouse contract
+      and integration health; review usage at renewal time.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
