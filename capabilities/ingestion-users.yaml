@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Greenhouse Candidate Ingestion API — Users
+  description: 'Greenhouse Candidate Ingestion API — Users. 1 operations. Lead operation: Get current user. Self-contained
+    Naftiko capability covering one Greenhouse business surface.'
+  tags:
+  - Greenhouse
+  - Users
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GREENHOUSE_API_KEY: GREENHOUSE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ingestion-users
+    baseUri: https://api.greenhouse.io/v1/partner
+    description: Greenhouse Candidate Ingestion API — Users business capability. Self-contained, no shared references.
+    resources:
+    - name: current_user
+      path: /current_user
+      operations:
+      - name: get
+        method: GET
+        description: Get current user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.GREENHOUSE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: ingestion-users-rest
+    port: 8080
+    description: REST adapter for Greenhouse Candidate Ingestion API — Users. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/current-user
+      name: current-user
+      description: REST surface for current_user.
+      operations:
+      - method: GET
+        name: get
+        description: Get current user
+        call: ingestion-users.get
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ingestion-users-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Greenhouse Candidate Ingestion API — Users. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-current-user
+      description: Get current user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ingestion-users.get
+      outputParameters:
+      - type: object
+        mapping: $.

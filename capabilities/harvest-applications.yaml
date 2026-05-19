@@ -1,0 +1,237 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Greenhouse Harvest API — Applications
+  description: 'Greenhouse Harvest API — Applications. 6 operations. Lead operation: List applications. Self-contained Naftiko
+    capability covering one Greenhouse business surface.'
+  tags:
+  - Greenhouse
+  - Applications
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GREENHOUSE_API_KEY: GREENHOUSE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: harvest-applications
+    baseUri: https://harvest.greenhouse.io/v1
+    description: Greenhouse Harvest API — Applications business capability. Self-contained, no shared references.
+    resources:
+    - name: applications
+      path: /applications
+      operations:
+      - name: get
+        method: GET
+        description: List applications
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: job_id
+          in: query
+          type: integer
+        - name: status
+          in: query
+          type: string
+    - name: applications-id
+      path: /applications/{id}
+      operations:
+      - name: get
+        method: GET
+        description: Retrieve application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: patch
+        method: PATCH
+        description: Update application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: applications-id-advance
+      path: /applications/{id}/advance
+      operations:
+      - name: post
+        method: POST
+        description: Advance application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: applications-id-hire
+      path: /applications/{id}/hire
+      operations:
+      - name: post
+        method: POST
+        description: Hire application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: applications-id-reject
+      path: /applications/{id}/reject
+      operations:
+      - name: post
+        method: POST
+        description: Reject application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.GREENHOUSE_USER}}'
+      password: '{{env.GREENHOUSE_PASS}}'
+  exposes:
+  - type: rest
+    namespace: harvest-applications-rest
+    port: 8080
+    description: REST adapter for Greenhouse Harvest API — Applications. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/applications
+      name: applications
+      description: REST surface for applications.
+      operations:
+      - method: GET
+        name: get
+        description: List applications
+        call: harvest-applications.get
+        with:
+          job_id: rest.job_id
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applications/{id}
+      name: applications-id
+      description: REST surface for applications-id.
+      operations:
+      - method: GET
+        name: get
+        description: Retrieve application
+        call: harvest-applications.get
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: patch
+        description: Update application
+        call: harvest-applications.patch
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applications/{id}/advance
+      name: applications-id-advance
+      description: REST surface for applications-id-advance.
+      operations:
+      - method: POST
+        name: post
+        description: Advance application
+        call: harvest-applications.post
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applications/{id}/hire
+      name: applications-id-hire
+      description: REST surface for applications-id-hire.
+      operations:
+      - method: POST
+        name: post
+        description: Hire application
+        call: harvest-applications.post
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applications/{id}/reject
+      name: applications-id-reject
+      description: REST surface for applications-id-reject.
+      operations:
+      - method: POST
+        name: post
+        description: Reject application
+        call: harvest-applications.post
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: harvest-applications-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Greenhouse Harvest API — Applications. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-applications
+      description: List applications
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: harvest-applications.get
+      with:
+        job_id: tools.job_id
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-application
+      description: Retrieve application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: harvest-applications.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-application
+      description: Update application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: harvest-applications.patch
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: advance-application
+      description: Advance application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: harvest-applications.post
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: hire-application
+      description: Hire application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: harvest-applications.post
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: reject-application
+      description: Reject application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: harvest-applications.post
+      outputParameters:
+      - type: object
+        mapping: $.

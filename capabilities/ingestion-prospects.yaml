@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Greenhouse Candidate Ingestion API — Prospects
+  description: 'Greenhouse Candidate Ingestion API — Prospects. 1 operations. Lead operation: List prospect pools. Self-contained
+    Naftiko capability covering one Greenhouse business surface.'
+  tags:
+  - Greenhouse
+  - Prospects
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GREENHOUSE_API_KEY: GREENHOUSE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ingestion-prospects
+    baseUri: https://api.greenhouse.io/v1/partner
+    description: Greenhouse Candidate Ingestion API — Prospects business capability. Self-contained, no shared references.
+    resources:
+    - name: prospect_pools
+      path: /prospect_pools
+      operations:
+      - name: get
+        method: GET
+        description: List prospect pools
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.GREENHOUSE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: ingestion-prospects-rest
+    port: 8080
+    description: REST adapter for Greenhouse Candidate Ingestion API — Prospects. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/prospect-pools
+      name: prospect-pools
+      description: REST surface for prospect_pools.
+      operations:
+      - method: GET
+        name: get
+        description: List prospect pools
+        call: ingestion-prospects.get
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ingestion-prospects-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Greenhouse Candidate Ingestion API — Prospects. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-prospect-pools
+      description: List prospect pools
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ingestion-prospects.get
+      outputParameters:
+      - type: object
+        mapping: $.

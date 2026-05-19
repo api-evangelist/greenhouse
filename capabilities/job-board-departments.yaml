@@ -1,0 +1,103 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Greenhouse Job Board API — Departments
+  description: 'Greenhouse Job Board API — Departments. 2 operations. Lead operation: List departments. Self-contained Naftiko
+    capability covering one Greenhouse business surface.'
+  tags:
+  - Greenhouse
+  - Departments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GREENHOUSE_API_KEY: GREENHOUSE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: job-board-departments
+    baseUri: https://boards-api.greenhouse.io/v1/boards/{board_token}
+    description: Greenhouse Job Board API — Departments business capability. Self-contained, no shared references.
+    resources:
+    - name: departments
+      path: /departments
+      operations:
+      - name: get
+        method: GET
+        description: List departments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: departments-department_id
+      path: /departments/{department_id}
+      operations:
+      - name: get
+        method: GET
+        description: Retrieve department
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.GREENHOUSE_USER}}'
+      password: '{{env.GREENHOUSE_PASS}}'
+  exposes:
+  - type: rest
+    namespace: job-board-departments-rest
+    port: 8080
+    description: REST adapter for Greenhouse Job Board API — Departments. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/departments
+      name: departments
+      description: REST surface for departments.
+      operations:
+      - method: GET
+        name: get
+        description: List departments
+        call: job-board-departments.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/departments/{department-id}
+      name: departments-department-id
+      description: REST surface for departments-department_id.
+      operations:
+      - method: GET
+        name: get
+        description: Retrieve department
+        call: job-board-departments.get
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: job-board-departments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Greenhouse Job Board API — Departments. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-departments
+      description: List departments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: job-board-departments.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-department
+      description: Retrieve department
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: job-board-departments.get
+      outputParameters:
+      - type: object
+        mapping: $.
