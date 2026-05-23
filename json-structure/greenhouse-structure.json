@@ -1,0 +1,191 @@
+{
+  "provider": "Greenhouse",
+  "providerId": "greenhouse",
+  "kind": "json-structure",
+  "description": "Structural overview of the Greenhouse API surface; extracted from openapi/.",
+  "schemaCount": 0,
+  "operationCount": 20,
+  "schemas": [],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/candidates",
+      "operationId": null,
+      "summary": "List candidates",
+      "tags": [
+        "Candidates"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/candidates",
+      "operationId": null,
+      "summary": "Create candidate",
+      "tags": [
+        "Candidates"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/candidates/{id}",
+      "operationId": null,
+      "summary": "Retrieve candidate",
+      "tags": [
+        "Candidates"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/candidates/{id}",
+      "operationId": null,
+      "summary": "Delete candidate",
+      "tags": [
+        "Candidates"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/candidates/{id}",
+      "operationId": null,
+      "summary": "Update candidate",
+      "tags": [
+        "Candidates"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/applications",
+      "operationId": null,
+      "summary": "List applications",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/applications/{id}",
+      "operationId": null,
+      "summary": "Retrieve application",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/applications/{id}",
+      "operationId": null,
+      "summary": "Update application",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/applications/{id}/advance",
+      "operationId": null,
+      "summary": "Advance application",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/applications/{id}/hire",
+      "operationId": null,
+      "summary": "Hire application",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/applications/{id}/reject",
+      "operationId": null,
+      "summary": "Reject application",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/jobs",
+      "operationId": null,
+      "summary": "List jobs",
+      "tags": [
+        "Jobs"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/jobs/{id}",
+      "operationId": null,
+      "summary": "Retrieve job",
+      "tags": [
+        "Jobs"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/jobs/{id}",
+      "operationId": null,
+      "summary": "Update job",
+      "tags": [
+        "Jobs"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/departments",
+      "operationId": null,
+      "summary": "List departments",
+      "tags": [
+        "Departments"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/offices",
+      "operationId": null,
+      "summary": "List offices",
+      "tags": [
+        "Offices"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/offices/{id}",
+      "operationId": null,
+      "summary": "Retrieve office",
+      "tags": [
+        "Offices"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/users",
+      "operationId": null,
+      "summary": "List users",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/users/{id}",
+      "operationId": null,
+      "summary": "Retrieve user",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/users/{id}",
+      "operationId": null,
+      "summary": "Update user",
+      "tags": [
+        "Users"
+      ]
+    }
+  ]
+}

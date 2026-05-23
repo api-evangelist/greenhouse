@@ -1,0 +1,11 @@
+name: Greenhouse Domain Vocabulary
+provider: Greenhouse
+providerId: greenhouse
+description: Tag-derived vocabulary for the Greenhouse API surface; sourced from openapi/ tags.
+terms:
+- term: Candidates
+- term: Applications
+- term: Jobs
+- term: Departments
+- term: Offices
+- term: Users
