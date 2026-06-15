@@ -1,0 +1,1243 @@
+{
+  "item": [
+    {
+      "id": "a23a4424-b618-4b29-9790-aa08ef9fcf8b",
+      "name": "Jobs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4b20440a-bfeb-4616-93b8-9d55e2c99fa2",
+          "name": "List job posts",
+          "request": {
+            "name": "List job posts",
+            "description": {},
+            "url": {
+              "path": [
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "content",
+                  "value": "<boolean>",
+                  "description": "Include full descriptions when true."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The board token issued by Greenhouse for the organization.",
+                  "type": "any",
+                  "value": "{{board_token}}",
+                  "key": "board_token"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "65571ab0-3d8b-455d-a398-0a52af99771f",
+              "name": "List of job posts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "content",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The board token issued by Greenhouse for the organization.",
+                      "type": "any",
+                      "value": "{{board_token}}",
+                      "key": "board_token"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd39f8f4-fa10-4157-b70c-7a99430d2340",
+          "name": "Retrieve job",
+          "request": {
+            "name": "Retrieve job",
+            "description": {},
+            "url": {
+              "path": [
+                "jobs",
+                ":job_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "job_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The board token issued by Greenhouse for the organization.",
+                  "type": "any",
+                  "value": "{{board_token}}",
+                  "key": "board_token"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dcfc9de2-b1b3-4d05-847f-d7abc3b80cf6",
+              "name": "A job with application questions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The board token issued by Greenhouse for the organization.",
+                      "type": "any",
+                      "value": "{{board_token}}",
+                      "key": "board_token"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6f7cf03-8ba6-40d0-b41d-052acaf43ff9",
+          "name": "Submit application",
+          "request": {
+            "name": "Submit application",
+            "description": {
+              "content": "Submit a job application using multipart form-data or JSON.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobs",
+                ":job_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "job_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The board token issued by Greenhouse for the organization.",
+                  "type": "any",
+                  "value": "{{board_token}}",
+                  "key": "board_token"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "0",
+                  "value": "<",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "1",
+                  "value": "o",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "2",
+                  "value": "b",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "3",
+                  "value": "j",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "4",
+                  "value": "e",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "5",
+                  "value": "c",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "6",
+                  "value": "t",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "7",
+                  "value": ">",
+                  "type": "text",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "571af4f5-3cdb-4802-a714-530dd12c973e",
+              "name": "Application submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The board token issued by Greenhouse for the organization.",
+                      "type": "any",
+                      "value": "{{board_token}}",
+                      "key": "board_token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "0",
+                      "value": "<",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "1",
+                      "value": "o",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "2",
+                      "value": "b",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "3",
+                      "value": "j",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "4",
+                      "value": "e",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "5",
+                      "value": "c",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "6",
+                      "value": "t",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "7",
+                      "value": ">",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "c468f551-4a05-4cd3-aa34-430dfd3992b1",
+      "name": "Offices",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c1ec0ba8-8abd-4f8b-be0c-dc40e4189e0a",
+          "name": "List offices",
+          "request": {
+            "name": "List offices",
+            "description": {},
+            "url": {
+              "path": [
+                "offices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The board token issued by Greenhouse for the organization.",
+                  "type": "any",
+                  "value": "{{board_token}}",
+                  "key": "board_token"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b43314b1-2f88-4568-96cc-58ef60c987fd",
+              "name": "Offices with departments and jobs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "offices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The board token issued by Greenhouse for the organization.",
+                      "type": "any",
+                      "value": "{{board_token}}",
+                      "key": "board_token"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a069848-6864-44eb-836d-cc0f8f3a12bc",
+          "name": "Retrieve office",
+          "request": {
+            "name": "Retrieve office",
+            "description": {},
+            "url": {
+              "path": [
+                "offices",
+                ":office_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "office_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The board token issued by Greenhouse for the organization.",
+                  "type": "any",
+                  "value": "{{board_token}}",
+                  "key": "board_token"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d04de19d-24c7-4ad7-86ae-b08330c9b45d",
+              "name": "Office with jobs and departments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "offices",
+                    ":office_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "office_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The board token issued by Greenhouse for the organization.",
+                      "type": "any",
+                      "value": "{{board_token}}",
+                      "key": "board_token"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "817e6698-9137-41d6-9180-3a170758c239",
+      "name": "Departments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "157f06b4-88cc-4879-aa84-308bf85c9bb7",
+          "name": "List departments",
+          "request": {
+            "name": "List departments",
+            "description": {},
+            "url": {
+              "path": [
+                "departments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The board token issued by Greenhouse for the organization.",
+                  "type": "any",
+                  "value": "{{board_token}}",
+                  "key": "board_token"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4fde332-0a97-43c7-ba91-0c5de5bf7bc1",
+              "name": "Departments and associated jobs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "departments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The board token issued by Greenhouse for the organization.",
+                      "type": "any",
+                      "value": "{{board_token}}",
+                      "key": "board_token"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6c71e37-4283-4ec8-bf49-09dc88a227e2",
+          "name": "Retrieve department",
+          "request": {
+            "name": "Retrieve department",
+            "description": {},
+            "url": {
+              "path": [
+                "departments",
+                ":department_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "department_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The board token issued by Greenhouse for the organization.",
+                  "type": "any",
+                  "value": "{{board_token}}",
+                  "key": "board_token"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0bfce79f-e245-4643-8f98-716e24d197ad",
+              "name": "Department with jobs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "departments",
+                    ":department_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "department_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The board token issued by Greenhouse for the organization.",
+                      "type": "any",
+                      "value": "{{board_token}}",
+                      "key": "board_token"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "963afad8-6857-4412-9ce4-67c3d77938b0",
+      "name": "Sections",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7e1a41ed-ffab-4729-9318-bd865f1e375f",
+          "name": "List prospect sections",
+          "request": {
+            "name": "List prospect sections",
+            "description": {},
+            "url": {
+              "path": [
+                "sections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The board token issued by Greenhouse for the organization.",
+                  "type": "any",
+                  "value": "{{board_token}}",
+                  "key": "board_token"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "05fbf504-1690-447d-8ee7-6735b6396ea8",
+              "name": "Prospect sections and postings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The board token issued by Greenhouse for the organization.",
+                      "type": "any",
+                      "value": "{{board_token}}",
+                      "key": "board_token"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1539fe58-fb6c-4850-9ad9-fa5a3090aaa4",
+          "name": "Retrieve prospect section",
+          "request": {
+            "name": "Retrieve prospect section",
+            "description": {},
+            "url": {
+              "path": [
+                "sections",
+                ":section_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "section_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The board token issued by Greenhouse for the organization.",
+                  "type": "any",
+                  "value": "{{board_token}}",
+                  "key": "board_token"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ad755080-bc2d-4ba2-8ae8-08adae2bea7c",
+              "name": "Section with prospect posts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sections",
+                    ":section_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "section_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The board token issued by Greenhouse for the organization.",
+                      "type": "any",
+                      "value": "{{board_token}}",
+                      "key": "board_token"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "01b00dbe-a3b9-4579-8e3d-44946898aba6",
+      "name": "Education",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9c1a2971-e9b6-4bb1-934c-629f96d25aed",
+          "name": "List degrees",
+          "request": {
+            "name": "List degrees",
+            "description": {},
+            "url": {
+              "path": [
+                "education",
+                "degrees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The board token issued by Greenhouse for the organization.",
+                  "type": "any",
+                  "value": "{{board_token}}",
+                  "key": "board_token"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "01f3d737-d7e9-4d13-957c-5aea6f7f2b66",
+              "name": "Available degree types",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "education",
+                    "degrees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The board token issued by Greenhouse for the organization.",
+                      "type": "any",
+                      "value": "{{board_token}}",
+                      "key": "board_token"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7bd93fd9-1c50-497f-9715-40a756634696",
+          "name": "List disciplines",
+          "request": {
+            "name": "List disciplines",
+            "description": {},
+            "url": {
+              "path": [
+                "education",
+                "disciplines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The board token issued by Greenhouse for the organization.",
+                  "type": "any",
+                  "value": "{{board_token}}",
+                  "key": "board_token"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de0310c8-6ad8-442e-821b-25a70c03aee2",
+              "name": "Field of study options",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "education",
+                    "disciplines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The board token issued by Greenhouse for the organization.",
+                      "type": "any",
+                      "value": "{{board_token}}",
+                      "key": "board_token"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e29a5c11-571e-4c11-b69b-52117bbddfc3",
+          "name": "List schools",
+          "request": {
+            "name": "List schools",
+            "description": {},
+            "url": {
+              "path": [
+                "education",
+                "schools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The board token issued by Greenhouse for the organization.",
+                  "type": "any",
+                  "value": "{{board_token}}",
+                  "key": "board_token"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "903c0dfa-74cb-451c-b028-33426a80c267",
+              "name": "Educational institutions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "education",
+                    "schools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The board token issued by Greenhouse for the organization.",
+                      "type": "any",
+                      "value": "{{board_token}}",
+                      "key": "board_token"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "d611a431-1551-43eb-90e0-c8ec68fb8beb",
+      "name": "Retrieve job board",
+      "request": {
+        "name": "Retrieve job board",
+        "description": {
+          "content": "Returns the organization name and job board content.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            ""
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "description": "The board token issued by Greenhouse for the organization.",
+              "type": "any",
+              "value": "{{board_token}}",
+              "key": "board_token"
+            }
+          ]
+        },
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "caf3b60c-c02b-4e3d-9924-29b6ce979046",
+          "name": "Job board metadata",
+          "originalRequest": {
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The board token issued by Greenhouse for the organization.",
+                  "type": "any",
+                  "value": "{{board_token}}",
+                  "key": "board_token"
+                }
+              ]
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The board token issued by Greenhouse for the organization.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "example",
+      "key": "board_token"
+    },
+    {
+      "type": "string",
+      "value": "https://boards-api.greenhouse.io/v1/boards/{{board_token}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "207a88a0-852b-4d44-a1ec-d8f496cd33b7",
+    "name": "Greenhouse Job Board API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Job Board API enables building careers pages with custom look and feel. Read endpoints (GET) require no authentication; submitting an application (POST) requires HTTP Basic Auth with the board's API key.\n\nContact Support:\n Name: Greenhouse Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "item": [
+    {
+      "id": "3f5e6f3c-2700-47f7-a247-81cbacec71e6",
+      "name": "Execute GraphQL query or mutation",
+      "request": {
+        "name": "Execute GraphQL query or mutation",
+        "description": {
+          "content": "Single GraphQL endpoint supporting employee, employees, department, departments, location, locations, customField, customFields, team, teams, and rateLimit queries; and mutations including updateEmployeeProfile, addPendingHire, addDepartment, updateDepartment, deleteDepartment, addLocation, updateLocation, and deleteLocation.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "graphql"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"<string>\",\n  \"variables\": \"<object>\",\n  \"operationName\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "67ad2a95-fb95-4e9d-b3a3-b4776646bdf7",
+          "name": "GraphQL response",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "graphql"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: basic",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Basic <credentials>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"variables\": \"<object>\",\n  \"operationName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"data\": {}\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://onboarding-api.greenhouse.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0761e727-2665-4122-8d4c-486c3065f813",
+    "name": "Greenhouse Onboarding API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Greenhouse Onboarding only supports GraphQL; there is no traditional REST API. All requests are POST to the single /graphql endpoint with JSON payloads containing GraphQL queries or mutations. Authentication uses HTTP Basic Auth with an Access Key (username) and Secret Key (password).\n\nContact Support:\n Name: Greenhouse Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

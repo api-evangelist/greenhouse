@@ -1,0 +1,253 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Job Board API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Default",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve job board",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://boards-api.greenhouse.io/v1/boards/{board_token}/"
+          },
+          "docs": "Returns the organization name and job board content."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List job posts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://boards-api.greenhouse.io/v1/boards/{board_token}/jobs",
+            "params": [
+              {
+                "name": "content",
+                "value": "",
+                "type": "query",
+                "description": "Include full descriptions when true."
+              }
+            ]
+          },
+          "docs": "List job posts"
+        },
+        {
+          "info": {
+            "name": "Retrieve job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://boards-api.greenhouse.io/v1/boards/{board_token}/jobs/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve job"
+        },
+        {
+          "info": {
+            "name": "Submit application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://boards-api.greenhouse.io/v1/boards/{board_token}/jobs/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Submit a job application using multipart form-data or JSON."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Offices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List offices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://boards-api.greenhouse.io/v1/boards/{board_token}/offices"
+          },
+          "docs": "List offices"
+        },
+        {
+          "info": {
+            "name": "Retrieve office",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://boards-api.greenhouse.io/v1/boards/{board_token}/offices/:office_id",
+            "params": [
+              {
+                "name": "office_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve office"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Departments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List departments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://boards-api.greenhouse.io/v1/boards/{board_token}/departments"
+          },
+          "docs": "List departments"
+        },
+        {
+          "info": {
+            "name": "Retrieve department",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://boards-api.greenhouse.io/v1/boards/{board_token}/departments/:department_id",
+            "params": [
+              {
+                "name": "department_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve department"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List prospect sections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://boards-api.greenhouse.io/v1/boards/{board_token}/sections"
+          },
+          "docs": "List prospect sections"
+        },
+        {
+          "info": {
+            "name": "Retrieve prospect section",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://boards-api.greenhouse.io/v1/boards/{board_token}/sections/:section_id",
+            "params": [
+              {
+                "name": "section_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve prospect section"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Education",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List degrees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://boards-api.greenhouse.io/v1/boards/{board_token}/education/degrees"
+          },
+          "docs": "List degrees"
+        },
+        {
+          "info": {
+            "name": "List disciplines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://boards-api.greenhouse.io/v1/boards/{board_token}/education/disciplines"
+          },
+          "docs": "List disciplines"
+        },
+        {
+          "info": {
+            "name": "List schools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://boards-api.greenhouse.io/v1/boards/{board_token}/education/schools"
+          },
+          "docs": "List schools"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

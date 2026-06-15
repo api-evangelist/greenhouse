@@ -1,0 +1,32 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Onboarding API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Execute GraphQL query or mutation",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://onboarding-api.greenhouse.io/graphql",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Single GraphQL endpoint supporting employee, employees, department, departments, location, locations, customField, customFields, team, teams, and rateLimit queries; and mutations including updateEmployeeProfile, addPendingHire, addDepartment, updateDepartment, deleteDepartment, addLocation, updateLocation, and deleteLocation."
+    }
+  ],
+  "bundled": true
+}

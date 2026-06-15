@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Candidate Ingestion API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Candidates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve candidate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.greenhouse.io/v1/partner/candidates"
+          },
+          "docs": "Retrieve a candidate's data subject to permission restrictions."
+        },
+        {
+          "info": {
+            "name": "Submit candidate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.greenhouse.io/v1/partner/candidates"
+          },
+          "docs": "Submit a new candidate or prospect to Greenhouse."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.greenhouse.io/v1/partner/current_user"
+          },
+          "docs": "Get current user"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.greenhouse.io/v1/partner/jobs"
+          },
+          "docs": "Retrieve jobs accessible to the current user."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tracking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate tracking link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.greenhouse.io/v1/partner/tracking_link"
+          },
+          "docs": "Generate a tracking link for a specific job."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Prospects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List prospect pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.greenhouse.io/v1/partner/prospect_pools"
+          },
+          "docs": "List prospect pools"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
