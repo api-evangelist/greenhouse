@@ -144,6 +144,12 @@ apis:
   - type: Documentation
     url: https://developers.greenhouse.io/onboarding_webhooks.html
 common:
+- type: VulnerabilityDisclosure
+  url: security/greenhouse-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/greenhouse-domain-security.yml
+- type: Authentication
+  url: authentication/greenhouse-authentication.yml
 - type: OAuthScopes
   url: scopes/greenhouse-scopes.yml
 - type: LinkedIn
