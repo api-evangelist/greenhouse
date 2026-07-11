@@ -144,6 +144,8 @@ apis:
   - type: Documentation
     url: https://developers.greenhouse.io/onboarding_webhooks.html
 common:
+- type: OAuthScopes
+  url: scopes/greenhouse-scopes.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/greenhouse-inc-
 - type: Documentation

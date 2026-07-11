@@ -1,0 +1,43 @@
+generated: '2026-07-11'
+method: searched
+source: openapi/greenhouse-ingestion-openapi.yml
+docs: https://developers.greenhouse.io/candidate-ingestion.html
+note: >-
+  The Candidate Ingestion API documents four OAuth permission scopes (they do not apply
+  when authenticating via Basic Auth). The Harvest API v3 also uses granular OAuth scopes
+  in the pattern harvest:<resource>:<action> (via auth.greenhouse.io), but Greenhouse
+  publishes no complete public list; only the two example scopes named in the Harvest
+  partner OAuth guide (https://harvestdocs.greenhouse.io/docs/harvest-partner-oauth)
+  are recorded here.
+schemes:
+- name: oauth2
+  source: openapi/greenhouse-ingestion-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.greenhouse.io/oauth/authorize
+    tokenUrl: https://api.greenhouse.io/oauth/token
+scopes:
+- scope: candidates.create
+  description: Create new candidates or prospects.
+  sources:
+  - https://developers.greenhouse.io/candidate-ingestion.html
+- scope: candidates.view
+  description: View candidates imported via this partner.
+  sources:
+  - https://developers.greenhouse.io/candidate-ingestion.html
+- scope: jobs.view
+  description: View my jobs.
+  sources:
+  - https://developers.greenhouse.io/candidate-ingestion.html
+- scope: prospect_pools.view
+  description: Retrieve prospect pools and their stages for an organization.
+  sources:
+  - https://developers.greenhouse.io/candidate-ingestion.html
+- scope: harvest:candidates:list
+  description: List candidates via the Harvest API v3 (example scope named in the Harvest partner OAuth guide).
+  sources:
+  - https://harvestdocs.greenhouse.io/docs/harvest-partner-oauth
+- scope: harvest:job_posts:list
+  description: List job posts via the Harvest API v3 (example scope named in the Harvest partner OAuth guide).
+  sources:
+  - https://harvestdocs.greenhouse.io/docs/harvest-partner-oauth
