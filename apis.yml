@@ -144,6 +144,8 @@ apis:
   - type: Documentation
     url: https://developers.greenhouse.io/onboarding_webhooks.html
 common:
+- type: AgenticAccess
+  url: agentic-access/greenhouse-agentic-access.yml
 - type: VulnerabilityDisclosure
   url: security/greenhouse-vulnerability-disclosure.yml
 - type: DomainSecurity
