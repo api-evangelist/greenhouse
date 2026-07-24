@@ -1,30 +1,23 @@
 openapi: 3.0.3
 info:
-  title: Greenhouse Onboarding API
-  description: >-
-    Greenhouse Onboarding only supports GraphQL; there is no traditional REST API. All
-    requests are POST to the single /graphql endpoint with JSON payloads containing
-    GraphQL queries or mutations. Authentication uses HTTP Basic Auth with an Access
-    Key (username) and Secret Key (password).
+  title: Greenhouse Harvest Applications Graphql API
+  description: The Harvest API provides programmatic access to Greenhouse Recruiting data, including candidates, applications, jobs, departments, offices, and users. Authentication uses HTTP Basic Auth with an API token.
   version: '1.0'
   contact:
     name: Greenhouse Developer Support
-    url: https://developers.greenhouse.io/gho.html
+    url: https://developers.greenhouse.io/harvest.html
 servers:
-  - url: https://onboarding-api.greenhouse.io
-    description: Production
+- url: https://harvest.greenhouse.io/v1
+  description: Production
 security:
-  - basicAuth: []
+- basicAuth: []
+tags:
+- name: Graphql
 paths:
   /graphql:
     post:
       summary: Execute GraphQL query or mutation
-      description: >-
-        Single GraphQL endpoint supporting employee, employees, department, departments,
-        location, locations, customField, customFields, team, teams, and rateLimit
-        queries; and mutations including updateEmployeeProfile, addPendingHire,
-        addDepartment, updateDepartment, deleteDepartment, addLocation, updateLocation,
-        and deleteLocation.
+      description: Single GraphQL endpoint supporting employee, employees, department, departments, location, locations, customField, customFields, team, teams, and rateLimit queries; and mutations including updateEmployeeProfile, addPendingHire, addDepartment, updateDepartment, deleteDepartment, addLocation, updateLocation, and deleteLocation.
       requestBody:
         required: true
         content:
@@ -52,6 +45,8 @@ paths:
                     type: array
                     items:
                       type: object
+      tags:
+      - Graphql
 components:
   securitySchemes:
     basicAuth:

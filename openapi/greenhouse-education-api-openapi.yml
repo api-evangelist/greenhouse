@@ -1,0 +1,45 @@
+openapi: 3.0.3
+info:
+  title: Greenhouse Harvest Applications Education API
+  description: The Harvest API provides programmatic access to Greenhouse Recruiting data, including candidates, applications, jobs, departments, offices, and users. Authentication uses HTTP Basic Auth with an API token.
+  version: '1.0'
+  contact:
+    name: Greenhouse Developer Support
+    url: https://developers.greenhouse.io/harvest.html
+servers:
+- url: https://harvest.greenhouse.io/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Education
+paths:
+  /education/degrees:
+    get:
+      tags:
+      - Education
+      summary: List degrees
+      responses:
+        '200':
+          description: Available degree types
+  /education/disciplines:
+    get:
+      tags:
+      - Education
+      summary: List disciplines
+      responses:
+        '200':
+          description: Field of study options
+  /education/schools:
+    get:
+      tags:
+      - Education
+      summary: List schools
+      responses:
+        '200':
+          description: Educational institutions
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic

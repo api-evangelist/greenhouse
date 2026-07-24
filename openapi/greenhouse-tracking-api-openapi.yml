@@ -1,0 +1,30 @@
+openapi: 3.0.3
+info:
+  title: Greenhouse Harvest Applications Tracking API
+  description: The Harvest API provides programmatic access to Greenhouse Recruiting data, including candidates, applications, jobs, departments, offices, and users. Authentication uses HTTP Basic Auth with an API token.
+  version: '1.0'
+  contact:
+    name: Greenhouse Developer Support
+    url: https://developers.greenhouse.io/harvest.html
+servers:
+- url: https://harvest.greenhouse.io/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Tracking
+paths:
+  /tracking_link:
+    post:
+      tags:
+      - Tracking
+      summary: Generate tracking link
+      description: Generate a tracking link for a specific job.
+      responses:
+        '200':
+          description: Tracking link created
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic

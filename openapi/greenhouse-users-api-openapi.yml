@@ -1,0 +1,61 @@
+openapi: 3.0.3
+info:
+  title: Greenhouse Harvest Applications Users API
+  description: The Harvest API provides programmatic access to Greenhouse Recruiting data, including candidates, applications, jobs, departments, offices, and users. Authentication uses HTTP Basic Auth with an API token.
+  version: '1.0'
+  contact:
+    name: Greenhouse Developer Support
+    url: https://developers.greenhouse.io/harvest.html
+servers:
+- url: https://harvest.greenhouse.io/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Users
+paths:
+  /users:
+    get:
+      tags:
+      - Users
+      summary: List users
+      responses:
+        '200':
+          description: A list of users
+  /users/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      tags:
+      - Users
+      summary: Retrieve user
+      responses:
+        '200':
+          description: A user
+    patch:
+      tags:
+      - Users
+      summary: Update user
+      responses:
+        '200':
+          description: User updated
+  /current_user:
+    get:
+      tags:
+      - Users
+      summary: Get current user
+      responses:
+        '200':
+          description: Authenticated user details
+components:
+  parameters:
+    Id:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic

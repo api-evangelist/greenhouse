@@ -1,0 +1,84 @@
+openapi: 3.0.3
+info:
+  title: Greenhouse Harvest Applications Candidates API
+  description: The Harvest API provides programmatic access to Greenhouse Recruiting data, including candidates, applications, jobs, departments, offices, and users. Authentication uses HTTP Basic Auth with an API token.
+  version: '1.0'
+  contact:
+    name: Greenhouse Developer Support
+    url: https://developers.greenhouse.io/harvest.html
+servers:
+- url: https://harvest.greenhouse.io/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Candidates
+paths:
+  /candidates:
+    get:
+      tags:
+      - Candidates
+      summary: List candidates
+      description: Retrieve a paginated list of all candidates.
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A list of candidates
+    post:
+      tags:
+      - Candidates
+      summary: Create candidate
+      description: Create a new candidate record.
+      responses:
+        '201':
+          description: Candidate created
+  /candidates/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      tags:
+      - Candidates
+      summary: Retrieve candidate
+      responses:
+        '200':
+          description: A candidate
+    patch:
+      tags:
+      - Candidates
+      summary: Update candidate
+      responses:
+        '200':
+          description: Candidate updated
+    delete:
+      tags:
+      - Candidates
+      summary: Delete candidate
+      responses:
+        '204':
+          description: Candidate deleted
+components:
+  parameters:
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        default: 1
+    Id:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        default: 100
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic

@@ -1,0 +1,43 @@
+openapi: 3.0.3
+info:
+  title: Greenhouse Harvest Applications Departments API
+  description: The Harvest API provides programmatic access to Greenhouse Recruiting data, including candidates, applications, jobs, departments, offices, and users. Authentication uses HTTP Basic Auth with an API token.
+  version: '1.0'
+  contact:
+    name: Greenhouse Developer Support
+    url: https://developers.greenhouse.io/harvest.html
+servers:
+- url: https://harvest.greenhouse.io/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Departments
+paths:
+  /departments:
+    get:
+      tags:
+      - Departments
+      summary: List departments
+      responses:
+        '200':
+          description: A list of departments
+  /departments/{department_id}:
+    parameters:
+    - in: path
+      name: department_id
+      required: true
+      schema:
+        type: integer
+    get:
+      tags:
+      - Departments
+      summary: Retrieve department
+      responses:
+        '200':
+          description: Department with jobs
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic

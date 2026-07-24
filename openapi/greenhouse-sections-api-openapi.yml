@@ -1,0 +1,43 @@
+openapi: 3.0.3
+info:
+  title: Greenhouse Harvest Applications Sections API
+  description: The Harvest API provides programmatic access to Greenhouse Recruiting data, including candidates, applications, jobs, departments, offices, and users. Authentication uses HTTP Basic Auth with an API token.
+  version: '1.0'
+  contact:
+    name: Greenhouse Developer Support
+    url: https://developers.greenhouse.io/harvest.html
+servers:
+- url: https://harvest.greenhouse.io/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Sections
+paths:
+  /sections:
+    get:
+      tags:
+      - Sections
+      summary: List prospect sections
+      responses:
+        '200':
+          description: Prospect sections and postings
+  /sections/{section_id}:
+    parameters:
+    - in: path
+      name: section_id
+      required: true
+      schema:
+        type: integer
+    get:
+      tags:
+      - Sections
+      summary: Retrieve prospect section
+      responses:
+        '200':
+          description: Section with prospect posts
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
