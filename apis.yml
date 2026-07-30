@@ -5,9 +5,22 @@ description: >-
   webhooks that let partners and customers manage candidates, jobs, applications, onboarding, audit logs, and assessment
   integrations.
 type: Index
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/greenhouse.png
 tags:
 - ATS
 - Recruiting
@@ -20,82 +33,11 @@ modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/greenhouse/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-- aid: greenhouse:harvest
-  name: Greenhouse Harvest API
-  description: >-
-    The Harvest API provides programmatic access to Greenhouse Recruiting data, including candidates, applications,
-    jobs, departments, offices, and users.
-  humanURL: https://developers.greenhouse.io/harvest.html
-  baseURL: https://harvest.greenhouse.io/v1
-  tags:
-  - Harvest
-  - Candidates
-  - Jobs
-  - Applications
-  properties:
-  - type: Documentation
-    url: https://developers.greenhouse.io/harvest.html
-  - type: OpenAPI
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/greenhouse/refs/heads/main/openapi/greenhouse-harvest-openapi.yml
-- aid: greenhouse:job-board
-  name: Greenhouse Job Board API
-  description: >-
-    The Job Board API enables building careers pages with custom look and feel, retrieving jobs, offices, departments,
-    sections, education reference data, and submitting applications.
-  humanURL: https://developers.greenhouse.io/job-board.html
-  baseURL: https://boards-api.greenhouse.io/v1/boards
-  tags:
-  - Job Board
-  - Careers
-  - Jobs
-  properties:
-  - type: Documentation
-    url: https://developers.greenhouse.io/job-board.html
-  - type: OpenAPI
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/greenhouse/refs/heads/main/openapi/greenhouse-job-board-openapi.yml
-- aid: greenhouse:ingestion
-  name: Greenhouse Candidate Ingestion API
-  description: >-
-    The Ingestion API enables sourcing partners to submit prospects and candidates to Greenhouse and to retrieve job
-    and prospect pool information.
-  humanURL: https://developers.greenhouse.io/candidate-ingestion.html
-  baseURL: https://api.greenhouse.io/v1/partner
-  tags:
-  - Ingestion
-  - Candidates
-  - Sourcing
-  properties:
-  - type: Documentation
-    url: https://developers.greenhouse.io/candidate-ingestion.html
-  - type: OpenAPI
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/greenhouse/refs/heads/main/openapi/greenhouse-ingestion-openapi.yml
-- aid: greenhouse:onboarding
-  name: Greenhouse Onboarding API
-  description: >-
-    A GraphQL API for Greenhouse Onboarding. Provides queries and mutations for employees, departments, locations,
-    custom fields, teams, and pending hires.
-  humanURL: https://developers.greenhouse.io/gho.html
-  baseURL: https://onboarding-api.greenhouse.io/graphql
-  tags:
-  - Onboarding
-  - GraphQL
-  - Employees
-  properties:
-  - type: Documentation
-    url: https://developers.greenhouse.io/gho.html
-  - type: OpenAPI
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/greenhouse/refs/heads/main/openapi/greenhouse-onboarding-openapi.yml
-  - url: graphql/greenhouse-graphql.md
-    type: GraphQL
 - aid: greenhouse:assessment
   name: Greenhouse Assessment API
   description: >-
-    The Assessment Partner API enables assessment platforms (code testing, video interviewing, personality testing) to
-    seamlessly integrate with the Greenhouse interview workflow.
+    The Assessment Partner API enables assessment platforms (code testing, video interviewing, personality
+    testing) to seamlessly integrate with the Greenhouse interview workflow.
   humanURL: https://developers.greenhouse.io/assessment.html
   tags:
   - Assessment
@@ -107,8 +49,8 @@ apis:
 - aid: greenhouse:audit-log
   name: Greenhouse Audit Log API
   description: >-
-    The Audit Log API offers a record of important events, providing insight into who accessed or edited information
-    in Greenhouse.
+    The Audit Log API offers a record of important events, providing insight into who accessed or edited
+    information in Greenhouse.
   humanURL: https://developers.greenhouse.io/audit-log.html
   tags:
   - Audit
@@ -120,8 +62,8 @@ apis:
 - aid: greenhouse:recruiting-webhooks
   name: Greenhouse Recruiting Webhooks
   description: >-
-    Recruiting Webhooks deliver event notifications for Greenhouse Recruiting activities such as candidate updates,
-    application stage changes, and offers.
+    Recruiting Webhooks deliver event notifications for Greenhouse Recruiting activities such as candidate
+    updates, application stage changes, and offers.
   humanURL: https://developers.greenhouse.io/webhooks.html
   tags:
   - Webhooks
@@ -133,8 +75,8 @@ apis:
 - aid: greenhouse:onboarding-webhooks
   name: Greenhouse Onboarding Webhooks
   description: >-
-    Onboarding Webhooks deliver event notifications for Greenhouse Onboarding activities such as new hires and
-    employee updates.
+    Onboarding Webhooks deliver event notifications for Greenhouse Onboarding activities such as new hires
+    and employee updates.
   humanURL: https://developers.greenhouse.io/onboarding_webhooks.html
   tags:
   - Webhooks
@@ -143,6 +85,247 @@ apis:
   properties:
   - type: Documentation
     url: https://developers.greenhouse.io/onboarding_webhooks.html
+- aid: greenhouse:greenhouse-applications-api
+  name: Greenhouse Applications API
+  description: The Applications API from Greenhouse — 5 operation(s) for applications.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Applications
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-applications-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-graphql.md
+- aid: greenhouse:greenhouse-candidates-api
+  name: Greenhouse Candidates API
+  description: The Candidates API from Greenhouse — 2 operation(s) for candidates.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Candidates
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-candidates-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-graphql.md
+- aid: greenhouse:greenhouse-departments-api
+  name: Greenhouse Departments API
+  description: The Departments API from Greenhouse — 2 operation(s) for departments.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Departments
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-departments-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-graphql.md
+- aid: greenhouse:greenhouse-education-api
+  name: Greenhouse Education API
+  description: The Education API from Greenhouse — 3 operation(s) for education.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Education
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-education-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-graphql.md
+- aid: greenhouse:greenhouse-graphql-api
+  name: Greenhouse Graphql API
+  description: The Graphql API from Greenhouse — 1 operation(s) for graphql.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Graphql
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-graphql-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-graphql.md
+- aid: greenhouse:greenhouse-greenhouse-job-board-api-api
+  name: Greenhouse Greenhouse Job Board API API
+  description: >-
+    The Greenhouse Job Board API API from Greenhouse — 1 operation(s) for greenhouse job board api.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Greenhouse Job Board API
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-greenhouse-job-board-api-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-graphql.md
+- aid: greenhouse:greenhouse-jobs-api
+  name: Greenhouse Jobs API
+  description: The Jobs API from Greenhouse — 3 operation(s) for jobs.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-graphql.md
+- aid: greenhouse:greenhouse-offices-api
+  name: Greenhouse Offices API
+  description: The Offices API from Greenhouse — 3 operation(s) for offices.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Offices
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-offices-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-graphql.md
+- aid: greenhouse:greenhouse-prospects-api
+  name: Greenhouse Prospects API
+  description: The Prospects API from Greenhouse — 1 operation(s) for prospects.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Prospects
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-prospects-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-graphql.md
+- aid: greenhouse:greenhouse-sections-api
+  name: Greenhouse Sections API
+  description: The Sections API from Greenhouse — 2 operation(s) for sections.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Sections
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-sections-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-graphql.md
+- aid: greenhouse:greenhouse-tracking-api
+  name: Greenhouse Tracking API
+  description: The Tracking API from Greenhouse — 1 operation(s) for tracking.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Tracking
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-tracking-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-graphql.md
+- aid: greenhouse:greenhouse-users-api
+  name: Greenhouse Users API
+  description: The Users API from Greenhouse — 3 operation(s) for users.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-users-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-graphql.md
 common:
 - type: AgenticAccess
   url: agentic-access/greenhouse-agentic-access.yml
