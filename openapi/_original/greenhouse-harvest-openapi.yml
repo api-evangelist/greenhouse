@@ -1,0 +1,210 @@
+openapi: 3.0.3
+info:
+  title: Greenhouse Harvest API
+  description: >-
+    The Harvest API provides programmatic access to Greenhouse Recruiting data, including
+    candidates, applications, jobs, departments, offices, and users. Authentication uses
+    HTTP Basic Auth with an API token.
+  version: '1.0'
+  contact:
+    name: Greenhouse Developer Support
+    url: https://developers.greenhouse.io/harvest.html
+servers:
+  - url: https://harvest.greenhouse.io/v1
+    description: Production
+security:
+  - basicAuth: []
+tags:
+  - name: Candidates
+  - name: Applications
+  - name: Jobs
+  - name: Departments
+  - name: Offices
+  - name: Users
+paths:
+  /candidates:
+    get:
+      tags: [Candidates]
+      summary: List candidates
+      description: Retrieve a paginated list of all candidates.
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A list of candidates
+    post:
+      tags: [Candidates]
+      summary: Create candidate
+      description: Create a new candidate record.
+      responses:
+        '201':
+          description: Candidate created
+  /candidates/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    get:
+      tags: [Candidates]
+      summary: Retrieve candidate
+      responses:
+        '200':
+          description: A candidate
+    patch:
+      tags: [Candidates]
+      summary: Update candidate
+      responses:
+        '200':
+          description: Candidate updated
+    delete:
+      tags: [Candidates]
+      summary: Delete candidate
+      responses:
+        '204':
+          description: Candidate deleted
+  /applications:
+    get:
+      tags: [Applications]
+      summary: List applications
+      parameters:
+        - in: query
+          name: job_id
+          schema: { type: integer }
+        - in: query
+          name: status
+          schema: { type: string }
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A list of applications
+  /applications/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    get:
+      tags: [Applications]
+      summary: Retrieve application
+      responses:
+        '200':
+          description: An application
+    patch:
+      tags: [Applications]
+      summary: Update application
+      responses:
+        '200':
+          description: Application updated
+  /applications/{id}/advance:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    post:
+      tags: [Applications]
+      summary: Advance application
+      responses:
+        '200':
+          description: Application advanced
+  /applications/{id}/hire:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    post:
+      tags: [Applications]
+      summary: Hire application
+      responses:
+        '200':
+          description: Application hired
+  /applications/{id}/reject:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    post:
+      tags: [Applications]
+      summary: Reject application
+      responses:
+        '200':
+          description: Application rejected
+  /jobs:
+    get:
+      tags: [Jobs]
+      summary: List jobs
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A list of jobs
+  /jobs/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    get:
+      tags: [Jobs]
+      summary: Retrieve job
+      responses:
+        '200':
+          description: A job
+    patch:
+      tags: [Jobs]
+      summary: Update job
+      responses:
+        '200':
+          description: Job updated
+  /departments:
+    get:
+      tags: [Departments]
+      summary: List departments
+      responses:
+        '200':
+          description: A list of departments
+  /offices:
+    get:
+      tags: [Offices]
+      summary: List offices
+      responses:
+        '200':
+          description: A list of offices
+  /offices/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    get:
+      tags: [Offices]
+      summary: Retrieve office
+      responses:
+        '200':
+          description: An office
+  /users:
+    get:
+      tags: [Users]
+      summary: List users
+      responses:
+        '200':
+          description: A list of users
+  /users/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    get:
+      tags: [Users]
+      summary: Retrieve user
+      responses:
+        '200':
+          description: A user
+    patch:
+      tags: [Users]
+      summary: Update user
+      responses:
+        '200':
+          description: User updated
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+  parameters:
+    Id:
+      in: path
+      name: id
+      required: true
+      schema: { type: integer }
+    Page:
+      in: query
+      name: page
+      schema: { type: integer, default: 1 }
+    PerPage:
+      in: query
+      name: per_page
+      schema: { type: integer, default: 100 }

@@ -1,0 +1,36 @@
+{
+  "provider": "greenhouse",
+  "sources": [
+    "greenhouse-applications-api-openapi.yml",
+    "greenhouse-candidates-api-openapi.yml",
+    "greenhouse-departments-api-openapi.yml",
+    "greenhouse-education-api-openapi.yml",
+    "greenhouse-graphql-api-openapi.yml",
+    "greenhouse-greenhouse-job-board-api-api-openapi.yml",
+    "greenhouse-jobs-api-openapi.yml",
+    "greenhouse-offices-api-openapi.yml",
+    "greenhouse-prospects-api-openapi.yml",
+    "greenhouse-sections-api-openapi.yml",
+    "greenhouse-tracking-api-openapi.yml",
+    "greenhouse-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "greenhouse-applications-api-openapi.yml",
+    "greenhouse-candidates-api-openapi.yml",
+    "greenhouse-departments-api-openapi.yml",
+    "greenhouse-education-api-openapi.yml",
+    "greenhouse-graphql-api-openapi.yml",
+    "greenhouse-greenhouse-job-board-api-api-openapi.yml",
+    "greenhouse-jobs-api-openapi.yml",
+    "greenhouse-offices-api-openapi.yml",
+    "greenhouse-prospects-api-openapi.yml",
+    "greenhouse-sections-api-openapi.yml",
+    "greenhouse-tracking-api-openapi.yml",
+    "greenhouse-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

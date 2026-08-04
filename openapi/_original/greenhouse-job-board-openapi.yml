@@ -1,0 +1,156 @@
+openapi: 3.0.3
+info:
+  title: Greenhouse Job Board API
+  description: >-
+    The Job Board API enables building careers pages with custom look and feel. Read
+    endpoints (GET) require no authentication; submitting an application (POST) requires
+    HTTP Basic Auth with the board's API key.
+  version: '1.0'
+  contact:
+    name: Greenhouse Developer Support
+    url: https://developers.greenhouse.io/job-board.html
+servers:
+  - url: https://boards-api.greenhouse.io/v1/boards/{board_token}
+    description: Production
+    variables:
+      board_token:
+        default: example
+        description: The board token issued by Greenhouse for the organization.
+tags:
+  - name: Jobs
+  - name: Offices
+  - name: Departments
+  - name: Sections
+  - name: Education
+paths:
+  /:
+    get:
+      summary: Retrieve job board
+      description: Returns the organization name and job board content.
+      responses:
+        '200':
+          description: Job board metadata
+  /jobs:
+    get:
+      tags: [Jobs]
+      summary: List job posts
+      parameters:
+        - in: query
+          name: content
+          description: Include full descriptions when true.
+          schema: { type: boolean }
+      responses:
+        '200':
+          description: List of job posts
+  /jobs/{job_id}:
+    parameters:
+      - in: path
+        name: job_id
+        required: true
+        schema: { type: integer }
+    get:
+      tags: [Jobs]
+      summary: Retrieve job
+      responses:
+        '200':
+          description: A job with application questions
+    post:
+      tags: [Jobs]
+      summary: Submit application
+      description: Submit a job application using multipart form-data or JSON.
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Application submitted
+  /offices:
+    get:
+      tags: [Offices]
+      summary: List offices
+      responses:
+        '200':
+          description: Offices with departments and jobs
+  /offices/{office_id}:
+    parameters:
+      - in: path
+        name: office_id
+        required: true
+        schema: { type: integer }
+    get:
+      tags: [Offices]
+      summary: Retrieve office
+      responses:
+        '200':
+          description: Office with jobs and departments
+  /departments:
+    get:
+      tags: [Departments]
+      summary: List departments
+      responses:
+        '200':
+          description: Departments and associated jobs
+  /departments/{department_id}:
+    parameters:
+      - in: path
+        name: department_id
+        required: true
+        schema: { type: integer }
+    get:
+      tags: [Departments]
+      summary: Retrieve department
+      responses:
+        '200':
+          description: Department with jobs
+  /sections:
+    get:
+      tags: [Sections]
+      summary: List prospect sections
+      responses:
+        '200':
+          description: Prospect sections and postings
+  /sections/{section_id}:
+    parameters:
+      - in: path
+        name: section_id
+        required: true
+        schema: { type: integer }
+    get:
+      tags: [Sections]
+      summary: Retrieve prospect section
+      responses:
+        '200':
+          description: Section with prospect posts
+  /education/degrees:
+    get:
+      tags: [Education]
+      summary: List degrees
+      responses:
+        '200':
+          description: Available degree types
+  /education/disciplines:
+    get:
+      tags: [Education]
+      summary: List disciplines
+      responses:
+        '200':
+          description: Field of study options
+  /education/schools:
+    get:
+      tags: [Education]
+      summary: List schools
+      responses:
+        '200':
+          description: Educational institutions
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
