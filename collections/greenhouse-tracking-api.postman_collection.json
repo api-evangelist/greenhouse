@@ -1,0 +1,113 @@
+{
+  "item": [
+    {
+      "id": "1f596424-7681-4f4b-8f58-11564d07c46d",
+      "name": "Tracking",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f51b66eb-e61c-4574-9823-68621cf0e8ab",
+          "name": "Generate tracking link",
+          "request": {
+            "name": "Generate tracking link",
+            "description": {
+              "content": "Generate a tracking link for a specific job.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tracking_link"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c23e9fd-bd0d-4134-8c6e-6d7184a88939",
+              "name": "Tracking link created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking_link"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://harvest.greenhouse.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b2c1e55b-d116-49c6-aa33-09ddcb16f384",
+    "name": "Greenhouse Harvest Applications Tracking API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Harvest API provides programmatic access to Greenhouse Recruiting data, including candidates, applications, jobs, departments, offices, and users. Authentication uses HTTP Basic Auth with an API token.\n\nContact Support:\n Name: Greenhouse Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

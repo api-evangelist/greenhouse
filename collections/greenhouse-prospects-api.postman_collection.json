@@ -1,0 +1,110 @@
+{
+  "item": [
+    {
+      "id": "043e4da9-cd16-4d8f-ad63-83ba9615c659",
+      "name": "Prospects",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a2f0e9ad-8b07-4ab0-acd5-b0b1b9dd6f6a",
+          "name": "List prospect pools",
+          "request": {
+            "name": "List prospect pools",
+            "description": {},
+            "url": {
+              "path": [
+                "prospect_pools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4a5ccac-b6ac-4b97-8fd1-c2164a486626",
+              "name": "Prospect pools and stages",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prospect_pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://harvest.greenhouse.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b70033ad-05c4-4fb0-8d1d-961c821df9ab",
+    "name": "Greenhouse Harvest Applications Prospects API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Harvest API provides programmatic access to Greenhouse Recruiting data, including candidates, applications, jobs, departments, offices, and users. Authentication uses HTTP Basic Auth with an API token.\n\nContact Support:\n Name: Greenhouse Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

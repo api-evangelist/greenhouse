@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Harvest Applications Tracking API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tracking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate tracking link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/tracking_link"
+          },
+          "docs": "Generate a tracking link for a specific job."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Harvest Applications Prospects API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Prospects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List prospect pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/prospect_pools"
+          },
+          "docs": "List prospect pools"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

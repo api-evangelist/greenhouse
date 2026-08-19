@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Harvest Applications Greenhouse Job Board API API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Greenhouse Job Board API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve job board",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/"
+          },
+          "docs": "Returns the organization name and job board content."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

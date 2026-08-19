@@ -1,0 +1,148 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Harvest Applications API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/applications",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List applications"
+        },
+        {
+          "info": {
+            "name": "Retrieve application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/applications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve application"
+        },
+        {
+          "info": {
+            "name": "Update application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://harvest.greenhouse.io/v1/applications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update application"
+        },
+        {
+          "info": {
+            "name": "Advance application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/applications/:id/advance",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Advance application"
+        },
+        {
+          "info": {
+            "name": "Hire application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/applications/:id/hire",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Hire application"
+        },
+        {
+          "info": {
+            "name": "Reject application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/applications/:id/reject",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Reject application"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

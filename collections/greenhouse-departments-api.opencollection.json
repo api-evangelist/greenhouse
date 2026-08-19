@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Harvest Applications Departments API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Departments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List departments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/departments"
+          },
+          "docs": "List departments"
+        },
+        {
+          "info": {
+            "name": "Retrieve department",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/departments/:department_id",
+            "params": [
+              {
+                "name": "department_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve department"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

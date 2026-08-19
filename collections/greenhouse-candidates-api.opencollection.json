@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Harvest Applications Candidates API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Candidates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List candidates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/candidates",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of all candidates."
+        },
+        {
+          "info": {
+            "name": "Create candidate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/candidates"
+          },
+          "docs": "Create a new candidate record."
+        },
+        {
+          "info": {
+            "name": "Retrieve candidate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/candidates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve candidate"
+        },
+        {
+          "info": {
+            "name": "Update candidate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://harvest.greenhouse.io/v1/candidates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update candidate"
+        },
+        {
+          "info": {
+            "name": "Delete candidate",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://harvest.greenhouse.io/v1/candidates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete candidate"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

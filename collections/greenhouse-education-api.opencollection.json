@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Harvest Applications Education API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Education",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List degrees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/education/degrees"
+          },
+          "docs": "List degrees"
+        },
+        {
+          "info": {
+            "name": "List disciplines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/education/disciplines"
+          },
+          "docs": "List disciplines"
+        },
+        {
+          "info": {
+            "name": "List schools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/education/schools"
+          },
+          "docs": "List schools"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
