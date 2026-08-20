@@ -25,6 +25,13 @@ tags:
 - ATS
 - Recruiting
 - Candidates
+- Job
+- Onboarding
+- HR
+tags_raw:
+- ATS
+- Recruiting
+- Candidates
 - Jobs
 - Onboarding
 - HR
@@ -66,6 +73,10 @@ apis:
     updates, application stage changes, and offers.
   humanURL: https://developers.greenhouse.io/webhooks.html
   tags:
+  - Webhook
+  - Recruiting
+  - Event
+  tags_raw:
   - Webhooks
   - Recruiting
   - Events
@@ -79,6 +90,10 @@ apis:
     and employee updates.
   humanURL: https://developers.greenhouse.io/onboarding_webhooks.html
   tags:
+  - Webhook
+  - Onboarding
+  - Event
+  tags_raw:
   - Webhooks
   - Onboarding
   - Events
@@ -91,6 +106,8 @@ apis:
   humanURL: https://developers.greenhouse.io/harvest.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
+  - Application
+  tags_raw:
   - Applications
   properties:
   - type: OpenAPI
@@ -171,6 +188,8 @@ apis:
   humanURL: https://developers.greenhouse.io/harvest.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
+  - GraphQL
+  tags_raw:
   - Graphql
   properties:
   - type: OpenAPI
@@ -212,6 +231,8 @@ apis:
   humanURL: https://developers.greenhouse.io/harvest.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
@@ -312,6 +333,8 @@ apis:
   humanURL: https://developers.greenhouse.io/harvest.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
