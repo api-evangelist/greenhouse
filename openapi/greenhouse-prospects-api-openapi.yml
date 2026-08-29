@@ -1,16 +1,17 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Greenhouse Harvest Applications Prospects API
-  description: The Harvest API provides programmatic access to Greenhouse Recruiting data, including candidates, applications, jobs, departments, offices, and users. Authentication uses HTTP Basic Auth with an API token.
+  title: Greenhouse Candidate Ingestion Prospects API
+  description: The Ingestion API enables sourcing partners to submit prospects and candidates to Greenhouse. Supports OAuth 2.0 for users with accounts in both systems and HTTP Basic Auth for partner submissions.
   version: '1.0'
   contact:
     name: Greenhouse Developer Support
-    url: https://developers.greenhouse.io/harvest.html
+    url: https://developers.greenhouse.io/candidate-ingestion.html
 servers:
-- url: https://harvest.greenhouse.io/v1
+- url: https://api.greenhouse.io/v1/partner
   description: Production
 security:
 - basicAuth: []
+- oauth2: []
 tags:
 - name: Prospects
 paths:
@@ -27,3 +28,10 @@ components:
     basicAuth:
       type: http
       scheme: basic
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.greenhouse.io/oauth/authorize
+          tokenUrl: https://api.greenhouse.io/oauth/token
+          scopes: {}

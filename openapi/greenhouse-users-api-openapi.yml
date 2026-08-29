@@ -1,16 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Greenhouse Harvest Applications Users API
-  description: The Harvest API provides programmatic access to Greenhouse Recruiting data, including candidates, applications, jobs, departments, offices, and users. Authentication uses HTTP Basic Auth with an API token.
+  title: Greenhouse Users API
   version: '1.0'
-  contact:
-    name: Greenhouse Developer Support
-    url: https://developers.greenhouse.io/harvest.html
+  description: 'Operations tagged Users across 2 of this provider''s published API definitions: greenhouse-harvest-openapi.yml, greenhouse-ingestion-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://harvest.greenhouse.io/v1
   description: Production
-security:
-- basicAuth: []
+- url: https://api.greenhouse.io/v1/partner
+  description: Production
 tags:
 - name: Users
 paths:
@@ -22,6 +19,11 @@ paths:
       responses:
         '200':
           description: A list of users
+      security:
+      - basicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production
   /users/{id}:
     parameters:
     - $ref: '#/components/parameters/Id'
@@ -32,6 +34,8 @@ paths:
       responses:
         '200':
           description: A user
+      security:
+      - basicAuth: []
     patch:
       tags:
       - Users
@@ -39,6 +43,11 @@ paths:
       responses:
         '200':
           description: User updated
+      security:
+      - basicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production
   /current_user:
     get:
       tags:
@@ -47,6 +56,12 @@ paths:
       responses:
         '200':
           description: Authenticated user details
+      security:
+      - basicAuth: []
+      - oauth2: []
+    servers:
+    - url: https://api.greenhouse.io/v1/partner
+      description: Production
 components:
   parameters:
     Id:
@@ -59,3 +74,13 @@ components:
     basicAuth:
       type: http
       scheme: basic
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.greenhouse.io/oauth/authorize
+          tokenUrl: https://api.greenhouse.io/oauth/token
+          scopes: {}
+x-refined-from:
+- greenhouse-harvest-openapi.yml
+- greenhouse-ingestion-openapi.yml

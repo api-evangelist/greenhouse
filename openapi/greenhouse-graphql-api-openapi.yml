@@ -1,13 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Greenhouse Harvest Applications Graphql API
-  description: The Harvest API provides programmatic access to Greenhouse Recruiting data, including candidates, applications, jobs, departments, offices, and users. Authentication uses HTTP Basic Auth with an API token.
+  title: Greenhouse Onboarding Graphql API
+  description: Greenhouse Onboarding only supports GraphQL; there is no traditional REST API. All requests are POST to the single /graphql endpoint with JSON payloads containing GraphQL queries or mutations. Authentication uses HTTP Basic Auth with an Access Key (username) and Secret Key (password).
   version: '1.0'
   contact:
     name: Greenhouse Developer Support
-    url: https://developers.greenhouse.io/harvest.html
+    url: https://developers.greenhouse.io/gho.html
 servers:
-- url: https://harvest.greenhouse.io/v1
+- url: https://onboarding-api.greenhouse.io
   description: Production
 security:
 - basicAuth: []

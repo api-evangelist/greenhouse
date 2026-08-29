@@ -1,36 +1,56 @@
 {
   "provider": "greenhouse",
   "sources": [
-    "greenhouse-applications-api-openapi.yml",
-    "greenhouse-candidates-api-openapi.yml",
-    "greenhouse-departments-api-openapi.yml",
-    "greenhouse-education-api-openapi.yml",
-    "greenhouse-graphql-api-openapi.yml",
-    "greenhouse-greenhouse-job-board-api-api-openapi.yml",
-    "greenhouse-jobs-api-openapi.yml",
-    "greenhouse-offices-api-openapi.yml",
-    "greenhouse-prospects-api-openapi.yml",
-    "greenhouse-sections-api-openapi.yml",
-    "greenhouse-tracking-api-openapi.yml",
-    "greenhouse-users-api-openapi.yml"
+    "_original/greenhouse-harvest-openapi.yml",
+    "_original/greenhouse-ingestion-openapi.yml",
+    "_original/greenhouse-job-board-openapi.yml",
+    "_original/greenhouse-onboarding-openapi.yml"
   ],
   "outputs": [
     "greenhouse-applications-api-openapi.yml",
     "greenhouse-candidates-api-openapi.yml",
     "greenhouse-departments-api-openapi.yml",
-    "greenhouse-education-api-openapi.yml",
-    "greenhouse-graphql-api-openapi.yml",
-    "greenhouse-greenhouse-job-board-api-api-openapi.yml",
     "greenhouse-jobs-api-openapi.yml",
     "greenhouse-offices-api-openapi.yml",
+    "greenhouse-users-api-openapi.yml",
     "greenhouse-prospects-api-openapi.yml",
-    "greenhouse-sections-api-openapi.yml",
     "greenhouse-tracking-api-openapi.yml",
-    "greenhouse-users-api-openapi.yml"
+    "greenhouse-education-api-openapi.yml",
+    "greenhouse-greenhouse-job-board-api-api-openapi.yml",
+    "greenhouse-sections-api-openapi.yml",
+    "greenhouse-graphql-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (4 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "greenhouse-harvest-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "greenhouse-ingestion-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "greenhouse-job-board-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "greenhouse-job-board-openapi.yml: tagged paths GET / -> Greenhouse Job Board API",
+    "greenhouse-job-board-openapi.yml: declared missing tag: Greenhouse Job Board API",
+    "greenhouse-onboarding-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "greenhouse-onboarding-openapi.yml: tagged paths POST /graphql -> Graphql",
+    "greenhouse-onboarding-openapi.yml: declared missing tag: Graphql",
+    "tag 'Candidates' spans 2 source specs (greenhouse-harvest-openapi.yml, greenhouse-ingestion-openapi.yml): per-path servers applied",
+    "tag 'Departments' spans 2 source specs (greenhouse-harvest-openapi.yml, greenhouse-job-board-openapi.yml): per-path servers applied",
+    "tag 'Jobs' spans 3 source specs (greenhouse-harvest-openapi.yml, greenhouse-ingestion-openapi.yml, greenhouse-job-board-openapi.yml): per-path servers applied",
+    "tag 'Offices' spans 2 source specs (greenhouse-harvest-openapi.yml, greenhouse-job-board-openapi.yml): per-path servers applied",
+    "tag 'Users' spans 2 source specs (greenhouse-harvest-openapi.yml, greenhouse-ingestion-openapi.yml): per-path servers applied"
+  ],
+  "skipped": [
+    "greenhouse-applications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "greenhouse-candidates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "greenhouse-departments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "greenhouse-education-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "greenhouse-graphql-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "greenhouse-greenhouse-job-board-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "greenhouse-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "greenhouse-offices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "greenhouse-prospects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "greenhouse-sections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "greenhouse-tracking-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "greenhouse-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

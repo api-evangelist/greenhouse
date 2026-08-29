@@ -1,16 +1,18 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Greenhouse Harvest Applications Sections API
-  description: The Harvest API provides programmatic access to Greenhouse Recruiting data, including candidates, applications, jobs, departments, offices, and users. Authentication uses HTTP Basic Auth with an API token.
+  title: Greenhouse Job Board Sections API
+  description: The Job Board API enables building careers pages with custom look and feel. Read endpoints (GET) require no authentication; submitting an application (POST) requires HTTP Basic Auth with the board's API key.
   version: '1.0'
   contact:
     name: Greenhouse Developer Support
-    url: https://developers.greenhouse.io/harvest.html
+    url: https://developers.greenhouse.io/job-board.html
 servers:
-- url: https://harvest.greenhouse.io/v1
+- url: https://boards-api.greenhouse.io/v1/boards/{board_token}
   description: Production
-security:
-- basicAuth: []
+  variables:
+    board_token:
+      default: example
+      description: The board token issued by Greenhouse for the organization.
 tags:
 - name: Sections
 paths:
