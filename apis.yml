@@ -356,6 +356,8 @@ apis:
   - type: GraphQL
     url: graphql/greenhouse-graphql.md
 common:
+- type: Website
+  url: https://greenhouse.io
 - type: AgenticAccess
   url: agentic-access/greenhouse-agentic-access.yml
 - type: VulnerabilityDisclosure
