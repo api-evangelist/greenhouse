@@ -1,9 +1,8 @@
 aid: greenhouse
 name: Greenhouse
-description: >-
-  Greenhouse is an applicant tracking system (ATS) and recruiting software platform. It exposes a family of APIs and
-  webhooks that let partners and customers manage candidates, jobs, applications, onboarding, audit logs, and assessment
-  integrations.
+description: Greenhouse is an applicant tracking system (ATS) and recruiting software platform. It exposes
+  a family of APIs and webhooks that let partners and customers manage candidates, jobs, applications,
+  onboarding, audit logs, and assessment integrations.
 type: Index
 deliveryModel:
   model: unknown
@@ -47,15 +46,14 @@ tags_raw:
 - Onboarding
 - HR
 created: '2025-01-07'
-modified: '2026-05-19'
+modified: '2026-09-16'
 url: https://raw.githubusercontent.com/api-evangelist/greenhouse/refs/heads/main/apis.yml
 specificationVersion: '0.23'
 apis:
 - aid: greenhouse:assessment
   name: Greenhouse Assessment API
-  description: >-
-    The Assessment Partner API enables assessment platforms (code testing, video interviewing, personality
-    testing) to seamlessly integrate with the Greenhouse interview workflow.
+  description: The Assessment Partner API enables assessment platforms (code testing, video interviewing,
+    personality testing) to seamlessly integrate with the Greenhouse interview workflow.
   humanURL: https://developers.greenhouse.io/assessment.html
   tags:
   - Assessment
@@ -66,9 +64,8 @@ apis:
     url: https://developers.greenhouse.io/assessment.html
 - aid: greenhouse:audit-log
   name: Greenhouse Audit Log API
-  description: >-
-    The Audit Log API offers a record of important events, providing insight into who accessed or edited
-    information in Greenhouse.
+  description: The Audit Log API offers a record of important events, providing insight into who accessed
+    or edited information in Greenhouse.
   humanURL: https://developers.greenhouse.io/audit-log.html
   tags:
   - Audit
@@ -79,9 +76,8 @@ apis:
     url: https://developers.greenhouse.io/audit-log.html
 - aid: greenhouse:recruiting-webhooks
   name: Greenhouse Recruiting Webhooks
-  description: >-
-    Recruiting Webhooks deliver event notifications for Greenhouse Recruiting activities such as candidate
-    updates, application stage changes, and offers.
+  description: Recruiting Webhooks deliver event notifications for Greenhouse Recruiting activities such
+    as candidate updates, application stage changes, and offers.
   humanURL: https://developers.greenhouse.io/webhooks.html
   tags:
   - Webhook
@@ -96,9 +92,8 @@ apis:
     url: https://developers.greenhouse.io/webhooks.html
 - aid: greenhouse:onboarding-webhooks
   name: Greenhouse Onboarding Webhooks
-  description: >-
-    Onboarding Webhooks deliver event notifications for Greenhouse Onboarding activities such as new hires
-    and employee updates.
+  description: Onboarding Webhooks deliver event notifications for Greenhouse Onboarding activities such
+    as new hires and employee updates.
   humanURL: https://developers.greenhouse.io/onboarding_webhooks.html
   tags:
   - Webhook
@@ -216,9 +211,9 @@ apis:
   - type: GraphQL
     url: graphql/greenhouse-graphql.md
 - aid: greenhouse:greenhouse-greenhouse-job-board-api-api
-  name: Greenhouse Greenhouse Job Board API API
-  description: >-
-    The Greenhouse Job Board API API from Greenhouse — 1 operation(s) for greenhouse job board api.
+  name: Greenhouse Job Board API
+  description: The Greenhouse Job Board API API from Greenhouse — 1 operation(s) for greenhouse job board
+    api.
   humanURL: https://developers.greenhouse.io/harvest.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
