@@ -32,12 +32,13 @@ position: Consuming
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/greenhouse.png
 tags:
+- Human Resources
+- Greenhouse
 - ATS
 - Recruiting
 - Candidates
 - Job
 - Onboarding
-- Human Resources
 tags_raw:
 - HR
 - Greenhouse
