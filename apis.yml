@@ -37,9 +37,10 @@ tags:
 - Candidates
 - Job
 - Onboarding
+- Human Resources
+tags_raw:
 - HR
 - Greenhouse
-tags_raw:
 - ATS
 - Recruiting
 - Candidates
@@ -344,6 +345,8 @@ apis:
   humanURL: https://developers.greenhouse.io/assessment.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
+  - GraphQL
+  tags_raw:
   - Graph QL
   properties:
   - type: OpenAPI
