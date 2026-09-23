@@ -24,6 +24,8 @@ paths:
       responses:
         '200':
           description: Prospect sections and postings
+      operationId: getSections
+      x-operation-id-source: derived
   /sections/{section_id}:
     parameters:
     - in: path
@@ -38,6 +40,8 @@ paths:
       responses:
         '200':
           description: Section with prospect posts
+      operationId: getSectionsBySectionId
+      x-operation-id-source: derived
 components:
   securitySchemes:
     basicAuth:

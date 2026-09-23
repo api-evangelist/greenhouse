@@ -24,6 +24,8 @@ paths:
       responses:
         '200':
           description: Tracking link created
+      operationId: postTrackingLink
+      x-operation-id-source: derived
 components:
   securitySchemes:
     basicAuth:

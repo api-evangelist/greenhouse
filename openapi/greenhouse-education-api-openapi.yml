@@ -24,6 +24,8 @@ paths:
       responses:
         '200':
           description: Available degree types
+      operationId: getEducationDegrees
+      x-operation-id-source: derived
   /education/disciplines:
     get:
       tags:
@@ -32,6 +34,8 @@ paths:
       responses:
         '200':
           description: Field of study options
+      operationId: getEducationDisciplines
+      x-operation-id-source: derived
   /education/schools:
     get:
       tags:
@@ -40,6 +44,8 @@ paths:
       responses:
         '200':
           description: Educational institutions
+      operationId: getEducationSchools
+      x-operation-id-source: derived
 components:
   securitySchemes:
     basicAuth:

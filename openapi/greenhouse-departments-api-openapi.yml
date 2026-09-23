@@ -25,6 +25,8 @@ paths:
           description: A list of departments
       security:
       - basicAuth: []
+      operationId: getDepartments
+      x-operation-id-source: derived
     servers:
     - url: https://harvest.greenhouse.io/v1
       description: Production
@@ -42,6 +44,8 @@ paths:
       responses:
         '200':
           description: Department with jobs
+      operationId: getDepartmentsByDepartmentId
+      x-operation-id-source: derived
     servers:
     - url: https://boards-api.greenhouse.io/v1/boards/{board_token}
       description: Production

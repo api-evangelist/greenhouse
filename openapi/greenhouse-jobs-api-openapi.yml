@@ -30,6 +30,8 @@ paths:
           description: A list of jobs
       security:
       - basicAuth: []
+      operationId: getJobs
+      x-operation-id-source: derived
     servers:
     - url: https://harvest.greenhouse.io/v1
       description: Production
@@ -45,6 +47,8 @@ paths:
           description: A job
       security:
       - basicAuth: []
+      operationId: getJobsById
+      x-operation-id-source: derived
     patch:
       tags:
       - Jobs
@@ -54,6 +58,8 @@ paths:
           description: Job updated
       security:
       - basicAuth: []
+      operationId: patchJobsById
+      x-operation-id-source: derived
     servers:
     - url: https://harvest.greenhouse.io/v1
       description: Production
@@ -71,6 +77,8 @@ paths:
       responses:
         '200':
           description: A job with application questions
+      operationId: getJobsByJobId
+      x-operation-id-source: derived
     post:
       tags:
       - Jobs
@@ -89,6 +97,8 @@ paths:
       responses:
         '200':
           description: Application submitted
+      operationId: postJobsByJobId
+      x-operation-id-source: derived
     servers:
     - url: https://boards-api.greenhouse.io/v1/boards/{board_token}
       description: Production
@@ -104,18 +114,18 @@ components:
       schema:
         type: integer
         default: 1
-    Id:
-      in: path
-      name: id
-      required: true
-      schema:
-        type: integer
     PerPage:
       in: query
       name: per_page
       schema:
         type: integer
         default: 100
+    Id:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: integer
   securitySchemes:
     basicAuth:
       type: http

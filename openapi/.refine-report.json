@@ -20,7 +20,9 @@
     "greenhouse-sections-api-openapi.yml",
     "greenhouse-graphql-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -37,14 +39,16 @@
     "tag 'Departments' spans 2 source specs (greenhouse-harvest-openapi.yml, greenhouse-job-board-openapi.yml): per-path servers applied",
     "tag 'Jobs' spans 3 source specs (greenhouse-harvest-openapi.yml, greenhouse-ingestion-openapi.yml, greenhouse-job-board-openapi.yml): per-path servers applied",
     "tag 'Offices' spans 2 source specs (greenhouse-harvest-openapi.yml, greenhouse-job-board-openapi.yml): per-path servers applied",
-    "tag 'Users' spans 2 source specs (greenhouse-harvest-openapi.yml, greenhouse-ingestion-openapi.yml): per-path servers applied"
+    "tag 'Users' spans 2 source specs (greenhouse-harvest-openapi.yml, greenhouse-ingestion-openapi.yml): per-path servers applied",
+    "superseded outputs removed: greenhouse-graph-ql-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 16 total)"
   ],
   "skipped": [
     "greenhouse-applications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "greenhouse-candidates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "greenhouse-departments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "greenhouse-education-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "greenhouse-graphql-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "greenhouse-graph-ql-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "greenhouse-greenhouse-job-board-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "greenhouse-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "greenhouse-offices-api-openapi.yml: previously refined output, superseded by openapi/_original/",

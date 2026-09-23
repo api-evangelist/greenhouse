@@ -23,6 +23,8 @@ paths:
       responses:
         '200':
           description: Prospect pools and stages
+      operationId: getProspectPools
+      x-operation-id-source: derived
 components:
   securitySchemes:
     basicAuth:

@@ -25,6 +25,8 @@ paths:
           description: Job board metadata
       tags:
       - Greenhouse Job Board API
+      operationId: getRoot
+      x-operation-id-source: derived
 components:
   securitySchemes:
     basicAuth:

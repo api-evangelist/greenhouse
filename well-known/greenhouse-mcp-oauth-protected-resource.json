@@ -1,0 +1,1 @@
+{"resource":"https://mcp.greenhouse.io/mcp","authorization_servers":["https://auth.greenhouse.io"],"scopes_supported":["greenhouse:mcp_client"],"bearer_methods_supported":["header"],"resource_name":"Greenhouse MCP Server","resource_documentation":"https://app.greenhouse.io"}

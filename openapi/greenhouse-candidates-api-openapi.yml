@@ -25,6 +25,8 @@ paths:
           description: A list of candidates
       security:
       - basicAuth: []
+      operationId: getCandidates
+      x-operation-id-source: derived
     post:
       tags:
       - Candidates
@@ -35,6 +37,8 @@ paths:
           description: Candidate created
       security:
       - basicAuth: []
+      operationId: postCandidates
+      x-operation-id-source: derived
     servers:
     - url: https://harvest.greenhouse.io/v1
       description: Production
@@ -50,6 +54,8 @@ paths:
           description: A candidate
       security:
       - basicAuth: []
+      operationId: getCandidatesById
+      x-operation-id-source: derived
     patch:
       tags:
       - Candidates
@@ -59,6 +65,8 @@ paths:
           description: Candidate updated
       security:
       - basicAuth: []
+      operationId: patchCandidatesById
+      x-operation-id-source: derived
     delete:
       tags:
       - Candidates
@@ -68,6 +76,8 @@ paths:
           description: Candidate deleted
       security:
       - basicAuth: []
+      operationId: deleteCandidatesById
+      x-operation-id-source: derived
     servers:
     - url: https://harvest.greenhouse.io/v1
       description: Production
@@ -79,18 +89,18 @@ components:
       schema:
         type: integer
         default: 1
-    Id:
-      in: path
-      name: id
-      required: true
-      schema:
-        type: integer
     PerPage:
       in: query
       name: per_page
       schema:
         type: integer
         default: 100
+    Id:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: integer
   securitySchemes:
     basicAuth:
       type: http
