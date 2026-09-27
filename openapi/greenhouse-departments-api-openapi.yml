@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Greenhouse Departments API
   version: '1.0'
-  description: 'Operations tagged Departments across 2 of this provider''s published API definitions: greenhouse-harvest-openapi.yml, greenhouse-job-board-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Departments across 3 of this provider''s published API definitions: greenhouse-harvest-openapi.yml, greenhouse-job-board-openapi.yml, greenhouse-io-departments-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://harvest.greenhouse.io/v1
   description: Production
@@ -29,7 +29,27 @@ paths:
       x-operation-id-source: derived
     servers:
     - url: https://harvest.greenhouse.io/v1
-      description: Production
+      description: Production Harvest API
+    post:
+      tags:
+      - Departments
+      summary: Create Department
+      operationId: createDepartment
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Department'
+      responses:
+        '201':
+          description: Created.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
   /departments/{department_id}:
     parameters:
     - in: path
@@ -53,11 +73,114 @@ paths:
         board_token:
           default: example
           description: The board token issued by Greenhouse for the organization.
+  /departments/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
+    get:
+      tags:
+      - Departments
+      summary: Retrieve Department
+      operationId: getDepartment
+      responses:
+        '200':
+          description: Department.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Department'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    patch:
+      tags:
+      - Departments
+      summary: Update Department
+      operationId: updateDepartment
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Department'
+      responses:
+        '200':
+          description: Updated.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
 components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    Department:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        parent_id:
+          type: integer
+          nullable: true
+        parent_department_external_id:
+          type: string
+          nullable: true
+        child_ids:
+          type: array
+          items:
+            type: integer
+        external_id:
+          type: string
+          nullable: true
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http
       scheme: basic
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic with the Harvest API key as the username and an empty password (Base64 encoded).
 x-refined-from:
 - greenhouse-harvest-openapi.yml
 - greenhouse-job-board-openapi.yml
+- greenhouse-io-departments-api-openapi.yml

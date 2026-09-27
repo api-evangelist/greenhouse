@@ -1,0 +1,192 @@
+openapi: 3.2.0
+info:
+  title: Greenhouse Harvest Scorecards API
+  description: 'The Harvest API is Greenhouse''s primary REST API for programmatic access to recruiting data:
+
+    candidates, applications, jobs, openings, job posts, departments, offices, users, offers,
+
+    approvals, scheduled interviews, scorecards, sources, tags, custom fields, prospect pools,
+
+    and the activity feed.'
+  version: 1.0.0
+  contact:
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
+  license:
+    name: Greenhouse API Terms
+    url: https://www.greenhouse.com/legal
+servers:
+- url: https://harvest.greenhouse.io/v1
+  description: Production Harvest API
+security:
+- BasicAuth: []
+tags:
+- name: Scorecards
+  description: Interview scorecards captured by interviewers.
+paths:
+  /scorecards:
+    get:
+      tags:
+      - Scorecards
+      summary: List Scorecards
+      operationId: listScorecards
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: Scorecards.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Scorecard'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /scorecards/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      tags:
+      - Scorecards
+      summary: Retrieve Scorecard
+      operationId: getScorecard
+      responses:
+        '200':
+          description: Scorecard.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Scorecard'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /applications/{id}/scorecards:
+    get:
+      tags:
+      - Scorecards
+      summary: List Application Scorecards
+      operationId: listApplicationScorecards
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Scorecards.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Scorecard'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    Scorecard:
+      type: object
+      properties:
+        id:
+          type: integer
+        application_id:
+          type: integer
+        interview:
+          type: string
+        interviewer:
+          $ref: '#/components/schemas/UserRef'
+        submitted_at:
+          type: string
+          format: date-time
+          nullable: true
+        overall_recommendation:
+          type: string
+          enum:
+          - strong_yes
+          - true
+          - false
+          - strong_no
+          - no_decision
+        attributes:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              type:
+                type: string
+              note:
+                type: string
+              rating:
+                type: string
+        questions:
+          type: array
+          items:
+            type: object
+            properties:
+              question:
+                type: string
+              answer:
+                type: string
+    UserRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        first_name:
+          type: string
+        last_name:
+          type: string
+        name:
+          type: string
+        employee_id:
+          type: string
+          nullable: true
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+    PerPage:
+      name: per_page
+      in: query
+      description: Default 100, max 500.
+      schema:
+        type: integer
+        default: 100
+        maximum: 500
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic with the Harvest API key as the username and an empty password (Base64 encoded).

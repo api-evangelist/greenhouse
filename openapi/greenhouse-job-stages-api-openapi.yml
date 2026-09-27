@@ -1,0 +1,143 @@
+openapi: 3.2.0
+info:
+  title: Greenhouse Harvest Job stages API
+  description: 'The Harvest API is Greenhouse''s primary REST API for programmatic access to recruiting data:
+
+    candidates, applications, jobs, openings, job posts, departments, offices, users, offers,
+
+    approvals, scheduled interviews, scorecards, sources, tags, custom fields, prospect pools,
+
+    and the activity feed.'
+  version: 1.0.0
+  contact:
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
+  license:
+    name: Greenhouse API Terms
+    url: https://www.greenhouse.com/legal
+servers:
+- url: https://harvest.greenhouse.io/v1
+  description: Production Harvest API
+security:
+- BasicAuth: []
+tags:
+- name: Job stages
+  description: The interview/pipeline stages a job uses.
+paths:
+  /job_stages:
+    get:
+      tags:
+      - Job stages
+      summary: List Job Stages
+      operationId: listJobStages
+      responses:
+        '200':
+          description: Job stages.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobStage'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /job_stages/{id}:
+    get:
+      tags:
+      - Job stages
+      summary: Retrieve Job Stage
+      operationId: getJobStage
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Job stage.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStage'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /jobs/{job_id}/stages:
+    get:
+      tags:
+      - Job stages
+      summary: List Job Stages For Job
+      operationId: listJobStagesForJob
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Stages.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobStage'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  schemas:
+    JobStage:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        priority:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        interviews:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic with the Harvest API key as the username and an empty password (Base64 encoded).

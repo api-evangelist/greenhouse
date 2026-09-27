@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Greenhouse Jobs API
   version: '1.0'
-  description: 'Operations tagged Jobs across 3 of this provider''s published API definitions: greenhouse-harvest-openapi.yml, greenhouse-ingestion-openapi.yml, greenhouse-job-board-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Jobs across 4 of this provider''s published API definitions: greenhouse-harvest-openapi.yml, greenhouse-ingestion-openapi.yml, greenhouse-job-board-openapi.yml, greenhouse-io-jobs-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://harvest.greenhouse.io/v1
   description: Production
@@ -33,8 +33,34 @@ paths:
       operationId: getJobs
       x-operation-id-source: derived
     servers:
-    - url: https://harvest.greenhouse.io/v1
-      description: Production
+    - url: https://api.greenhouse.io/v1/partner
+      description: Production Partner API
+    post:
+      tags:
+      - Jobs
+      summary: Create Job
+      operationId: createJob
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobCreate'
+      responses:
+        '201':
+          description: Created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - OAuth2:
+        - partner
+      - BasicAuth: []
   /jobs/{id}:
     parameters:
     - $ref: '#/components/parameters/Id'
@@ -106,14 +132,117 @@ paths:
         board_token:
           default: example
           description: The board token issued by Greenhouse for the organization.
+  /jobs/{id}/hiring_team:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
+    get:
+      tags:
+      - Jobs
+      summary: Retrieve Job Hiring Team
+      operationId: getJobHiringTeam
+      responses:
+        '200':
+          description: Hiring team.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HiringTeam'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    put:
+      tags:
+      - Jobs
+      summary: Replace Job Hiring Team
+      operationId: replaceJobHiringTeam
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HiringTeam'
+      responses:
+        '200':
+          description: Replaced.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HiringTeam'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+  /jobs/{id}/hiring_team_members:
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
+    post:
+      tags:
+      - Jobs
+      summary: Add Hiring Team Member
+      operationId: addHiringTeamMember
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - user_id
+              - role
+              properties:
+                user_id:
+                  type: integer
+                role:
+                  type: string
+                  enum:
+                  - hiring_manager
+                  - recruiter
+                  - coordinator
+                  - sourcer
+                  - interviewer
+      responses:
+        '201':
+          description: Added.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+  /jobs/{id}/hiring_team_members/{user_id}:
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
+    delete:
+      tags:
+      - Jobs
+      summary: Remove Hiring Team Member
+      operationId: removeHiringTeamMember
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      responses:
+        '204':
+          description: Removed.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
 components:
   parameters:
-    Page:
-      in: query
-      name: page
-      schema:
-        type: integer
-        default: 1
     PerPage:
       in: query
       name: per_page
@@ -126,6 +255,221 @@ components:
       required: true
       schema:
         type: integer
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        default: 1
+    OnBehalfOf_2:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    Opening:
+      type: object
+      properties:
+        id:
+          type: integer
+        opening_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - open
+          - closed
+        opened_at:
+          type: string
+          format: date-time
+        closed_at:
+          type: string
+          format: date-time
+          nullable: true
+        application_id:
+          type: integer
+          nullable: true
+        close_reason:
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        custom_fields:
+          type: object
+          additionalProperties: true
+    Department:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        parent_id:
+          type: integer
+          nullable: true
+        parent_department_external_id:
+          type: string
+          nullable: true
+        child_ids:
+          type: array
+          items:
+            type: integer
+        external_id:
+          type: string
+          nullable: true
+    Job:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        requisition_id:
+          type: string
+          nullable: true
+        notes:
+          type: string
+        confidential:
+          type: boolean
+        status:
+          type: string
+          enum:
+          - open
+          - closed
+          - draft
+        created_at:
+          type: string
+          format: date-time
+        opened_at:
+          type: string
+          format: date-time
+          nullable: true
+        closed_at:
+          type: string
+          format: date-time
+          nullable: true
+        updated_at:
+          type: string
+          format: date-time
+        departments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Department'
+        offices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Office'
+        hiring_team:
+          $ref: '#/components/schemas/HiringTeam'
+        custom_fields:
+          type: object
+          additionalProperties: true
+        openings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Opening'
+    HiringTeam:
+      type: object
+      properties:
+        hiring_managers:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRef'
+        recruiters:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRef'
+        coordinators:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRef'
+        sourcers:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRef'
+    Office:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        location:
+          type: object
+          properties:
+            name:
+              type: string
+        parent_id:
+          type: integer
+          nullable: true
+        child_ids:
+          type: array
+          items:
+            type: integer
+        external_id:
+          type: string
+          nullable: true
+    JobCreate:
+      type: object
+      required:
+      - name
+      - template_job_id
+      properties:
+        name:
+          type: string
+        template_job_id:
+          type: integer
+        requisition_id:
+          type: string
+        department_id:
+          type: integer
+        office_ids:
+          type: array
+          items:
+            type: integer
+        number_of_openings:
+          type: integer
+    UserRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        first_name:
+          type: string
+        last_name:
+          type: string
+        name:
+          type: string
+        employee_id:
+          type: string
+          nullable: true
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http
@@ -137,7 +481,24 @@ components:
           authorizationUrl: https://api.greenhouse.io/oauth/authorize
           tokenUrl: https://api.greenhouse.io/oauth/token
           scopes: {}
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.greenhouse.io/oauth/authorize
+          tokenUrl: https://app.greenhouse.io/oauth/token
+          scopes:
+            partner: Partner integration scope.
+        clientCredentials:
+          tokenUrl: https://app.greenhouse.io/oauth/token
+          scopes:
+            partner: Partner integration scope.
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic with the Partner API key as the username and an empty password.
 x-refined-from:
 - greenhouse-harvest-openapi.yml
 - greenhouse-ingestion-openapi.yml
 - greenhouse-job-board-openapi.yml
+- greenhouse-io-jobs-api-openapi.yml

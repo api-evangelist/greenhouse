@@ -1,0 +1,86 @@
+openapi: 3.2.0
+info:
+  title: Greenhouse Harvest Sources API
+  description: 'The Harvest API is Greenhouse''s primary REST API for programmatic access to recruiting data:
+
+    candidates, applications, jobs, openings, job posts, departments, offices, users, offers,
+
+    approvals, scheduled interviews, scorecards, sources, tags, custom fields, prospect pools,
+
+    and the activity feed.'
+  version: 1.0.0
+  contact:
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
+  license:
+    name: Greenhouse API Terms
+    url: https://www.greenhouse.com/legal
+servers:
+- url: https://harvest.greenhouse.io/v1
+  description: Production Harvest API
+security:
+- BasicAuth: []
+tags:
+- name: Sources
+  description: Candidate-source taxonomy (where the candidate came from).
+paths:
+  /sources:
+    get:
+      tags:
+      - Sources
+      summary: List Sources
+      operationId: listSources
+      responses:
+        '200':
+          description: Sources.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Source'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    Source:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        name:
+          type: string
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic with the Harvest API key as the username and an empty password (Base64 encoded).

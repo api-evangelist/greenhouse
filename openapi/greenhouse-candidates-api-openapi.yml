@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Greenhouse Candidates API
   version: '1.0'
-  description: 'Operations tagged Candidates across 2 of this provider''s published API definitions: greenhouse-harvest-openapi.yml, greenhouse-ingestion-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Candidates across 3 of this provider''s published API definitions: greenhouse-harvest-openapi.yml, greenhouse-ingestion-openapi.yml, greenhouse-io-candidates-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://harvest.greenhouse.io/v1
   description: Production
@@ -40,8 +40,24 @@ paths:
       operationId: postCandidates
       x-operation-id-source: derived
     servers:
-    - url: https://harvest.greenhouse.io/v1
-      description: Production
+    - url: https://api.greenhouse.io/v1/partner
+      description: Production Partner API
+    delete:
+      tags:
+      - Candidates
+      summary: Delete Candidates Bulk
+      operationId: deleteCandidates
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      responses:
+        '204':
+          description: Deleted.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - OAuth2:
+        - partner
+      - BasicAuth: []
   /candidates/{id}:
     parameters:
     - $ref: '#/components/parameters/Id'
@@ -81,14 +97,277 @@ paths:
     servers:
     - url: https://harvest.greenhouse.io/v1
       description: Production
+  /candidates/{id}/attachments:
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
+    post:
+      tags:
+      - Candidates
+      summary: Add Candidate Attachment
+      operationId: addCandidateAttachment
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Attachment'
+      responses:
+        '201':
+          description: Attached.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+  /candidates/{id}/notes:
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
+    post:
+      tags:
+      - Candidates
+      summary: Add Candidate Note
+      operationId: addCandidateNote
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - user_id
+              - body
+              - visibility
+              properties:
+                user_id:
+                  type: integer
+                body:
+                  type: string
+                visibility:
+                  type: string
+                  enum:
+                  - admin_only
+                  - private
+                  - public
+      responses:
+        '201':
+          description: Note added.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+  /candidates/{id}/email_notes:
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
+    post:
+      tags:
+      - Candidates
+      summary: Add Candidate Email Note
+      operationId: addCandidateEmailNote
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                to:
+                  type: string
+                from:
+                  type: string
+                subject:
+                  type: string
+                body:
+                  type: string
+      responses:
+        '201':
+          description: Email note recorded.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+  /candidates/{id}/education:
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
+    post:
+      tags:
+      - Candidates
+      summary: Add Candidate Education
+      operationId: addCandidateEducation
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Education'
+      responses:
+        '201':
+          description: Education added.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+  /candidates/{id}/education/{education_id}:
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
+    delete:
+      tags:
+      - Candidates
+      summary: Delete Candidate Education
+      operationId: deleteCandidateEducation
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - name: education_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      responses:
+        '204':
+          description: Deleted.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+  /candidates/{id}/employment:
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
+    post:
+      tags:
+      - Candidates
+      summary: Add Candidate Employment
+      operationId: addCandidateEmployment
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employment'
+      responses:
+        '201':
+          description: Employment added.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+  /candidates/{id}/employment/{employment_id}:
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
+    delete:
+      tags:
+      - Candidates
+      summary: Delete Candidate Employment
+      operationId: deleteCandidateEmployment
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - name: employment_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      responses:
+        '204':
+          description: Deleted.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+  /candidates/{id}/prospect:
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
+    post:
+      tags:
+      - Candidates
+      summary: Convert Candidate To Prospect
+      operationId: candidateToProspect
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      responses:
+        '200':
+          description: Converted to prospect.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+  /candidates/{id}/anonymize:
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
+    put:
+      tags:
+      - Candidates
+      summary: Anonymize Candidate
+      operationId: anonymizeCandidate
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      responses:
+        '200':
+          description: Anonymized.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+  /candidates/{id}/merge:
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
+    put:
+      tags:
+      - Candidates
+      summary: Merge Candidate
+      operationId: mergeCandidate
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - primary_candidate_id
+              properties:
+                primary_candidate_id:
+                  type: integer
+                duplicate_candidate_id:
+                  type: integer
+      responses:
+        '200':
+          description: Merged.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
 components:
   parameters:
-    Page:
-      in: query
-      name: page
-      schema:
-        type: integer
-        default: 1
     PerPage:
       in: query
       name: per_page
@@ -101,6 +380,95 @@ components:
       required: true
       schema:
         type: integer
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        default: 1
+    OnBehalfOf_2:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+  schemas:
+    Employment:
+      type: object
+      properties:
+        company_name:
+          type: string
+        title:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    Attachment:
+      type: object
+      required:
+      - filename
+      - type
+      properties:
+        filename:
+          type: string
+        url:
+          type: string
+          format: uri
+        type:
+          type: string
+          enum:
+          - resume
+          - cover_letter
+          - admin_only
+          - public
+          - offer_letter
+          - take_home_test
+          - offer_packet
+        content:
+          type: string
+          description: Base64 file content.
+        content_type:
+          type: string
+    Education:
+      type: object
+      properties:
+        school_name:
+          type: string
+        degree:
+          type: string
+        discipline:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http
@@ -112,6 +480,23 @@ components:
           authorizationUrl: https://api.greenhouse.io/oauth/authorize
           tokenUrl: https://api.greenhouse.io/oauth/token
           scopes: {}
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.greenhouse.io/oauth/authorize
+          tokenUrl: https://app.greenhouse.io/oauth/token
+          scopes:
+            partner: Partner integration scope.
+        clientCredentials:
+          tokenUrl: https://app.greenhouse.io/oauth/token
+          scopes:
+            partner: Partner integration scope.
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic with the Partner API key as the username and an empty password.
 x-refined-from:
 - greenhouse-harvest-openapi.yml
 - greenhouse-ingestion-openapi.yml
+- greenhouse-io-candidates-api-openapi.yml

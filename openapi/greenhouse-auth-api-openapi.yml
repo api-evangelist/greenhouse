@@ -1,0 +1,64 @@
+openapi: 3.2.0
+info:
+  title: Greenhouse Audit Log Auth API
+  description: 'The Audit Log API exposes a record of important events that occurred in Greenhouse
+
+    during the prior 30 days, including who performed each event, the event target,
+
+    and supporting request metadata. Authentication uses a short-lived JWT obtained
+
+    from POST https://harvest.greenhouse.io/auth/jwt_access_token using a Harvest API key.
+
+    Rate limits: 50 requests / 10s on standard reads, 3 requests / 30s on paginated reads.'
+  version: 1.0.0
+  contact:
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
+servers:
+- url: https://auditlog.us.greenhouse.io
+  description: US Production
+- url: https://harvest.greenhouse.io/auth
+  description: JWT token issuer (Harvest)
+security:
+- BearerAuth: []
+tags:
+- name: Auth
+  description: JWT access token issuance.
+paths:
+  /jwt_access_token:
+    post:
+      tags:
+      - Auth
+      summary: Issue Audit Log Access Token
+      description: Exchanges a Harvest API key (HTTP Basic) for a JWT bearer token valid for 24 hours.
+      operationId: issueAuditAccessToken
+      servers:
+      - url: https://harvest.greenhouse.io/auth
+      security:
+      - HarvestBasic: []
+      responses:
+        '200':
+          description: Token issued.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  token_type:
+                    type: string
+                    example: Bearer
+                  expires_in:
+                    type: integer
+                    description: Seconds until expiration.
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    HarvestBasic:
+      type: http
+      scheme: basic

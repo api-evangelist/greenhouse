@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Greenhouse Users API
   version: '1.0'
-  description: 'Operations tagged Users across 2 of this provider''s published API definitions: greenhouse-harvest-openapi.yml, greenhouse-ingestion-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Users across 3 of this provider''s published API definitions: greenhouse-harvest-openapi.yml, greenhouse-ingestion-openapi.yml, greenhouse-io-users-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://harvest.greenhouse.io/v1
   description: Production
@@ -25,7 +25,27 @@ paths:
       x-operation-id-source: derived
     servers:
     - url: https://harvest.greenhouse.io/v1
-      description: Production
+      description: Production Harvest API
+    post:
+      tags:
+      - Users
+      summary: Create User
+      operationId: createUser
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: Created.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
   /users/{id}:
     parameters:
     - $ref: '#/components/parameters/Id'
@@ -70,6 +90,39 @@ paths:
     servers:
     - url: https://api.greenhouse.io/v1/partner
       description: Production
+  /users/{id}/email_addresses:
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
+    post:
+      tags:
+      - Users
+      summary: Add User Email
+      operationId: addUserEmail
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              properties:
+                email:
+                  type: string
+                  format: email
+                primary:
+                  type: boolean
+      responses:
+        '201':
+          description: Added.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
 components:
   parameters:
     Id:
@@ -78,6 +131,71 @@ components:
       required: true
       schema:
         type: integer
+    OnBehalfOf_2:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        first_name:
+          type: string
+        last_name:
+          type: string
+        name:
+          type: string
+        primary_email_address:
+          type: string
+          format: email
+        emails:
+          type: array
+          items:
+            type: string
+            format: email
+        employee_id:
+          type: string
+          nullable: true
+        site_admin:
+          type: boolean
+        disabled:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        linked_candidate_ids:
+          type: array
+          items:
+            type: integer
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http
@@ -89,6 +207,23 @@ components:
           authorizationUrl: https://api.greenhouse.io/oauth/authorize
           tokenUrl: https://api.greenhouse.io/oauth/token
           scopes: {}
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.greenhouse.io/oauth/authorize
+          tokenUrl: https://app.greenhouse.io/oauth/token
+          scopes:
+            partner: Partner integration scope.
+        clientCredentials:
+          tokenUrl: https://app.greenhouse.io/oauth/token
+          scopes:
+            partner: Partner integration scope.
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic with the Partner API key as the username and an empty password.
 x-refined-from:
 - greenhouse-harvest-openapi.yml
 - greenhouse-ingestion-openapi.yml
+- greenhouse-io-users-api-openapi.yml

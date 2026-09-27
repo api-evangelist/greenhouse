@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Greenhouse Offices API
   version: '1.0'
-  description: 'Operations tagged Offices across 2 of this provider''s published API definitions: greenhouse-harvest-openapi.yml, greenhouse-job-board-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Offices across 3 of this provider''s published API definitions: greenhouse-harvest-openapi.yml, greenhouse-job-board-openapi.yml, greenhouse-io-offices-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://harvest.greenhouse.io/v1
   description: Production
@@ -29,7 +29,27 @@ paths:
       x-operation-id-source: derived
     servers:
     - url: https://harvest.greenhouse.io/v1
-      description: Production
+      description: Production Harvest API
+    post:
+      tags:
+      - Offices
+      summary: Create Office
+      operationId: createOffice
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Office'
+      responses:
+        '201':
+          description: Created.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
   /offices/{id}:
     parameters:
     - $ref: '#/components/parameters/Id'
@@ -46,7 +66,27 @@ paths:
       x-operation-id-source: derived
     servers:
     - url: https://harvest.greenhouse.io/v1
-      description: Production
+      description: Production Harvest API
+    patch:
+      tags:
+      - Offices
+      summary: Update Office
+      operationId: updateOffice
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Office'
+      responses:
+        '200':
+          description: Updated.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
   /offices/{office_id}:
     parameters:
     - in: path
@@ -78,10 +118,66 @@ components:
       required: true
       schema:
         type: integer
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    Office:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        location:
+          type: object
+          properties:
+            name:
+              type: string
+        parent_id:
+          type: integer
+          nullable: true
+        child_ids:
+          type: array
+          items:
+            type: integer
+        external_id:
+          type: string
+          nullable: true
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http
       scheme: basic
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic with the Harvest API key as the username and an empty password (Base64 encoded).
 x-refined-from:
 - greenhouse-harvest-openapi.yml
 - greenhouse-job-board-openapi.yml
+- greenhouse-io-offices-api-openapi.yml

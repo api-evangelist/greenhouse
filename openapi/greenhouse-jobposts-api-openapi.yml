@@ -1,0 +1,271 @@
+openapi: 3.2.0
+info:
+  title: Greenhouse Harvest Job Posts API
+  description: 'The Harvest API is Greenhouse''s primary REST API for programmatic access to recruiting data:
+
+    candidates, applications, jobs, openings, job posts, departments, offices, users, offers,
+
+    approvals, scheduled interviews, scorecards, sources, tags, custom fields, prospect pools,
+
+    and the activity feed.'
+  version: 1.0.0
+  contact:
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
+  license:
+    name: Greenhouse API Terms
+    url: https://www.greenhouse.com/legal
+servers:
+- url: https://harvest.greenhouse.io/v1
+  description: Production Harvest API
+security:
+- BasicAuth: []
+tags:
+- name: JobPosts
+  description: Public-facing job postings and their statuses.
+paths:
+  /job_posts:
+    get:
+      tags:
+      - JobPosts
+      summary: List Job Posts
+      operationId: listJobPosts
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - name: live
+        in: query
+        schema:
+          type: boolean
+      - name: active
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Array of job posts.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobPost'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /job_posts/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      tags:
+      - JobPosts
+      summary: Retrieve Job Post
+      operationId: getJobPost
+      responses:
+        '200':
+          description: Job post.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobPost'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    patch:
+      tags:
+      - JobPosts
+      summary: Update Job Post
+      operationId: updateJobPost
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobPost'
+      responses:
+        '200':
+          description: Updated.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /job_posts/{id}/custom_locations:
+    get:
+      tags:
+      - JobPosts
+      summary: List Job Post Custom Locations
+      operationId: listJobPostCustomLocations
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Custom locations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    region:
+                      type: string
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /job_posts/{id}/status:
+    patch:
+      tags:
+      - JobPosts
+      summary: Update Job Post Status
+      operationId: updateJobPostStatus
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - status
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - live
+                  - offline
+      responses:
+        '200':
+          description: Status changed.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /jobs/{job_id}/job_posts:
+    get:
+      tags:
+      - JobPosts
+      summary: List Job Posts For Job
+      operationId: listJobJobPosts
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Job posts for a job.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobPost'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /jobs/{job_id}/job_posts/{id}:
+    get:
+      tags:
+      - JobPosts
+      summary: Retrieve Job Job Post
+      operationId: getJobJobPost
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Job post.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobPost'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    JobPost:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        location:
+          type: object
+          properties:
+            name:
+              type: string
+        internal:
+          type: boolean
+        active:
+          type: boolean
+        live:
+          type: boolean
+        first_published_at:
+          type: string
+          format: date-time
+          nullable: true
+        content:
+          type: string
+        questions:
+          type: array
+          items:
+            type: object
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      in: query
+      description: Default 100, max 500.
+      schema:
+        type: integer
+        default: 100
+        maximum: 500
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic with the Harvest API key as the username and an empty password (Base64 encoded).

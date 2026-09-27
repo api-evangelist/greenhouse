@@ -1,0 +1,281 @@
+openapi: 3.2.0
+info:
+  title: Greenhouse Harvest Custom Fields API
+  description: 'The Harvest API is Greenhouse''s primary REST API for programmatic access to recruiting data:
+
+    candidates, applications, jobs, openings, job posts, departments, offices, users, offers,
+
+    approvals, scheduled interviews, scorecards, sources, tags, custom fields, prospect pools,
+
+    and the activity feed.'
+  version: 1.0.0
+  contact:
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
+  license:
+    name: Greenhouse API Terms
+    url: https://www.greenhouse.com/legal
+servers:
+- url: https://harvest.greenhouse.io/v1
+  description: Production Harvest API
+security:
+- BasicAuth: []
+tags:
+- name: Custom Fields
+  description: Org-defined custom fields and their options.
+paths:
+  /custom_fields:
+    get:
+      tags:
+      - Custom Fields
+      summary: List Custom Fields
+      operationId: listCustomFields
+      responses:
+        '200':
+          description: Custom fields.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomField'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    post:
+      tags:
+      - Custom Fields
+      summary: Create Custom Field
+      operationId: createCustomField
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomField'
+      responses:
+        '201':
+          description: Created.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /custom_fields/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      tags:
+      - Custom Fields
+      summary: Retrieve Custom Field
+      operationId: getCustomField
+      responses:
+        '200':
+          description: Custom field.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomField'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    patch:
+      tags:
+      - Custom Fields
+      summary: Update Custom Field
+      operationId: updateCustomField
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomField'
+      responses:
+        '200':
+          description: Updated.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    delete:
+      tags:
+      - Custom Fields
+      summary: Delete Custom Field
+      operationId: deleteCustomField
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '204':
+          description: Deleted.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /custom_fields/{id}/custom_field_options:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      tags:
+      - Custom Fields
+      summary: List Custom Field Options
+      operationId: listCustomFieldOptions
+      responses:
+        '200':
+          description: Options.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomFieldOption'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    post:
+      tags:
+      - Custom Fields
+      summary: Create Custom Field Option
+      operationId: createCustomFieldOption
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomFieldOption'
+      responses:
+        '201':
+          description: Created.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /custom_fields/{id}/custom_field_options/{option_id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    - name: option_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    patch:
+      tags:
+      - Custom Fields
+      summary: Update Custom Field Option
+      operationId: updateCustomFieldOption
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomFieldOption'
+      responses:
+        '200':
+          description: Updated.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    delete:
+      tags:
+      - Custom Fields
+      summary: Delete Custom Field Option
+      operationId: deleteCustomFieldOption
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '204':
+          description: Deleted.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    CustomField:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        field_type:
+          type: string
+          enum:
+          - job
+          - candidate
+          - application
+          - offer
+          - opening
+          - department
+          - office
+          - user
+          - prospect
+        value_type:
+          type: string
+          enum:
+          - short_text
+          - long_text
+          - currency
+          - currency_range
+          - date
+          - number
+          - number_range
+          - single_select
+          - multi_select
+          - url
+          - yes_no
+        active:
+          type: boolean
+        required:
+          type: boolean
+        private:
+          type: boolean
+        custom_field_options:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomFieldOption'
+    CustomFieldOption:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        priority:
+          type: integer
+        external_id:
+          type: string
+          nullable: true
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic with the Harvest API key as the username and an empty password (Base64 encoded).

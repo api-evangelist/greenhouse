@@ -1,0 +1,187 @@
+openapi: 3.2.0
+info:
+  title: Greenhouse Harvest Tags API
+  description: 'The Harvest API is Greenhouse''s primary REST API for programmatic access to recruiting data:
+
+    candidates, applications, jobs, openings, job posts, departments, offices, users, offers,
+
+    approvals, scheduled interviews, scorecards, sources, tags, custom fields, prospect pools,
+
+    and the activity feed.'
+  version: 1.0.0
+  contact:
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
+  license:
+    name: Greenhouse API Terms
+    url: https://www.greenhouse.com/legal
+servers:
+- url: https://harvest.greenhouse.io/v1
+  description: Production Harvest API
+security:
+- BasicAuth: []
+tags:
+- name: Tags
+  description: Candidate tags.
+paths:
+  /candidate_tags:
+    get:
+      tags:
+      - Tags
+      summary: List Candidate Tags
+      operationId: listCandidateTags
+      responses:
+        '200':
+          description: Tags.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tag'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    post:
+      tags:
+      - Tags
+      summary: Create Candidate Tag
+      operationId: createCandidateTag
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+      responses:
+        '201':
+          description: Created.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /candidate_tags/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    delete:
+      tags:
+      - Tags
+      summary: Delete Candidate Tag
+      operationId: deleteCandidateTag
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '204':
+          description: Deleted.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /candidates/{id}/candidate_tags:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      tags:
+      - Tags
+      summary: List Candidate Candidate Tags
+      operationId: listCandidateCandidateTags
+      responses:
+        '200':
+          description: Tags.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tag'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    put:
+      tags:
+      - Tags
+      summary: Replace Candidate Tags
+      operationId: replaceCandidateTags
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tag_ids:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        '200':
+          description: Replaced.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /candidates/{id}/candidate_tags/{tag_id}:
+    delete:
+      tags:
+      - Tags
+      summary: Remove Candidate Tag
+      operationId: removeCandidateTag
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - name: tag_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '204':
+          description: Removed.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    Tag:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic with the Harvest API key as the username and an empty password (Base64 encoded).

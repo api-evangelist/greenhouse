@@ -1,0 +1,201 @@
+openapi: 3.2.0
+info:
+  title: Greenhouse Harvest Approvals API
+  description: 'The Harvest API is Greenhouse''s primary REST API for programmatic access to recruiting data:
+
+    candidates, applications, jobs, openings, job posts, departments, offices, users, offers,
+
+    approvals, scheduled interviews, scorecards, sources, tags, custom fields, prospect pools,
+
+    and the activity feed.'
+  version: 1.0.0
+  contact:
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
+  license:
+    name: Greenhouse API Terms
+    url: https://www.greenhouse.com/legal
+servers:
+- url: https://harvest.greenhouse.io/v1
+  description: Production Harvest API
+security:
+- BasicAuth: []
+tags:
+- name: Approvals
+  description: Approval flows for jobs and offers.
+paths:
+  /users/{id}/pending_approvals:
+    get:
+      tags:
+      - Approvals
+      summary: List User Pending Approvals
+      operationId: listUserPendingApprovals
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Pending approvals.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /approval_flows:
+    post:
+      tags:
+      - Approvals
+      summary: Create Approval Flow
+      operationId: createApprovalFlow
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                job_id:
+                  type: integer
+                approval_groups:
+                  type: array
+                  items:
+                    type: object
+      responses:
+        '201':
+          description: Created.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /approval_flows/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      tags:
+      - Approvals
+      summary: Retrieve Approval Flow
+      operationId: getApprovalFlow
+      responses:
+        '200':
+          description: Approval flow.
+          content:
+            application/json:
+              schema:
+                type: object
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /approval_flows/{id}/approval_groups/{group_id}/approvers/{user_id}:
+    put:
+      tags:
+      - Approvals
+      summary: Replace Approver
+      operationId: replaceApprover
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - name: group_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '200':
+          description: Replaced.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /jobs/{job_id}/approval_flows:
+    parameters:
+    - name: job_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      tags:
+      - Approvals
+      summary: List Job Approval Flows
+      operationId: listJobApprovalFlows
+      responses:
+        '200':
+          description: Approval flows.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    put:
+      tags:
+      - Approvals
+      summary: Replace Job Approval Flow
+      operationId: replaceJobApprovalFlow
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                approval_groups:
+                  type: array
+                  items:
+                    type: object
+      responses:
+        '200':
+          description: Replaced.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  parameters:
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic with the Harvest API key as the username and an empty password (Base64 encoded).

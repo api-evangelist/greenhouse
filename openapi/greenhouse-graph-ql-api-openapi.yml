@@ -1,19 +1,37 @@
 openapi: 3.2.0
 info:
-  title: Greenhouse Onboarding Graphql API
-  description: Greenhouse Onboarding only supports GraphQL; there is no traditional REST API. All requests are POST to the single /graphql endpoint with JSON payloads containing GraphQL queries or mutations. Authentication uses HTTP Basic Auth with an Access Key (username) and Secret Key (password).
-  version: '1.0'
+  title: Greenhouse Onboarding Graph QL API
+  description: 'The Greenhouse Onboarding (GHO) API is a single GraphQL endpoint exposing employee,
+
+    department, location, custom field, and team data along with mutations for creating
+
+    and updating departments, locations, pending hires, and employee profiles.'
+  version: 1.0.0
   contact:
-    name: Greenhouse Developer Support
-    url: https://developers.greenhouse.io/gho.html
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
 servers:
 - url: https://onboarding-api.greenhouse.io
-  description: Production
+  description: Onboarding GraphQL endpoint host.
 security:
-- basicAuth: []
+- BasicAuth: []
 tags:
 - name: Graph QL
+  description: Single GraphQL endpoint for all Onboarding operations.
 paths:
+  /graphql/introspection:
+    get:
+      tags:
+      - Graph QL
+      summary: Onboarding GraphQL Schema (Documentation Pointer)
+      description: 'GraphQL schema is discovered via introspection by POSTing a standard introspection
+
+        query to /graphql. This path is documentation-only and not an additional HTTP route.'
+      operationId: getOnboardingIntrospectionDocs
+      responses:
+        '200':
+          description: See documentation.
   /graphql:
     post:
       summary: Execute GraphQL query or mutation
@@ -51,6 +69,10 @@ paths:
       x-operation-id-source: derived
 components:
   securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic with the Onboarding Access Key as username and Secret Key as password.
     basicAuth:
       type: http
       scheme: basic
