@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Greenhouse Jobs API
   version: '1.0'
-  description: 'Operations tagged Jobs across 4 of this provider''s published API definitions: greenhouse-harvest-openapi.yml, greenhouse-ingestion-openapi.yml, greenhouse-job-board-openapi.yml, greenhouse-io-jobs-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Jobs across 4 of this provider''s published API definitions: greenhouse-harvest-openapi.yml, greenhouse-ingestion-openapi.yml, greenhouse-job-board-openapi.yml, greenhouse-jobs-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://harvest.greenhouse.io/v1
   description: Production
@@ -249,18 +249,18 @@ components:
       schema:
         type: integer
         default: 100
-    Id:
-      in: path
-      name: id
-      required: true
-      schema:
-        type: integer
     Page:
       in: query
       name: page
       schema:
         type: integer
         default: 1
+    Id:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: integer
     OnBehalfOf_2:
       name: On-Behalf-Of
       in: header
@@ -269,20 +269,6 @@ components:
       schema:
         type: integer
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
     Opening:
       type: object
       properties:
@@ -316,77 +302,6 @@ components:
         custom_fields:
           type: object
           additionalProperties: true
-    Department:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        parent_id:
-          type: integer
-          nullable: true
-        parent_department_external_id:
-          type: string
-          nullable: true
-        child_ids:
-          type: array
-          items:
-            type: integer
-        external_id:
-          type: string
-          nullable: true
-    Job:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        requisition_id:
-          type: string
-          nullable: true
-        notes:
-          type: string
-        confidential:
-          type: boolean
-        status:
-          type: string
-          enum:
-          - open
-          - closed
-          - draft
-        created_at:
-          type: string
-          format: date-time
-        opened_at:
-          type: string
-          format: date-time
-          nullable: true
-        closed_at:
-          type: string
-          format: date-time
-          nullable: true
-        updated_at:
-          type: string
-          format: date-time
-        departments:
-          type: array
-          items:
-            $ref: '#/components/schemas/Department'
-        offices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Office'
-        hiring_team:
-          $ref: '#/components/schemas/HiringTeam'
-        custom_fields:
-          type: object
-          additionalProperties: true
-        openings:
-          type: array
-          items:
-            $ref: '#/components/schemas/Opening'
     HiringTeam:
       type: object
       properties:
@@ -463,6 +378,91 @@ components:
         employee_id:
           type: string
           nullable: true
+    Department:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        parent_id:
+          type: integer
+          nullable: true
+        parent_department_external_id:
+          type: string
+          nullable: true
+        child_ids:
+          type: array
+          items:
+            type: integer
+        external_id:
+          type: string
+          nullable: true
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    Job:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        requisition_id:
+          type: string
+          nullable: true
+        notes:
+          type: string
+        confidential:
+          type: boolean
+        status:
+          type: string
+          enum:
+          - open
+          - closed
+          - draft
+        created_at:
+          type: string
+          format: date-time
+        opened_at:
+          type: string
+          format: date-time
+          nullable: true
+        closed_at:
+          type: string
+          format: date-time
+          nullable: true
+        updated_at:
+          type: string
+          format: date-time
+        departments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Department'
+        offices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Office'
+        hiring_team:
+          $ref: '#/components/schemas/HiringTeam'
+        custom_fields:
+          type: object
+          additionalProperties: true
+        openings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Opening'
   responses:
     ErrorResponse:
       description: Error response.
@@ -501,4 +501,4 @@ x-refined-from:
 - greenhouse-harvest-openapi.yml
 - greenhouse-ingestion-openapi.yml
 - greenhouse-job-board-openapi.yml
-- greenhouse-io-jobs-api-openapi.yml
+- greenhouse-jobs-api-openapi.yml

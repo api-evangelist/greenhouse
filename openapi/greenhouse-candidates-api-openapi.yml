@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Greenhouse Candidates API
   version: '1.0'
-  description: 'Operations tagged Candidates across 3 of this provider''s published API definitions: greenhouse-harvest-openapi.yml, greenhouse-ingestion-openapi.yml, greenhouse-io-candidates-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Candidates across 3 of this provider''s published API definitions: greenhouse-harvest-openapi.yml, greenhouse-ingestion-openapi.yml, greenhouse-candidates-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://harvest.greenhouse.io/v1
   description: Production
@@ -374,18 +374,18 @@ components:
       schema:
         type: integer
         default: 100
-    Id:
-      in: path
-      name: id
-      required: true
-      schema:
-        type: integer
     Page:
       in: query
       name: page
       schema:
         type: integer
         default: 1
+    Id:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: integer
     OnBehalfOf_2:
       name: On-Behalf-Of
       in: header
@@ -400,6 +400,21 @@ components:
         company_name:
           type: string
         title:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+    Education:
+      type: object
+      properties:
+        school_name:
+          type: string
+        degree:
+          type: string
+        discipline:
           type: string
         start_date:
           type: string
@@ -447,21 +462,6 @@ components:
           description: Base64 file content.
         content_type:
           type: string
-    Education:
-      type: object
-      properties:
-        school_name:
-          type: string
-        degree:
-          type: string
-        discipline:
-          type: string
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
   responses:
     ErrorResponse:
       description: Error response.
@@ -499,4 +499,4 @@ components:
 x-refined-from:
 - greenhouse-harvest-openapi.yml
 - greenhouse-ingestion-openapi.yml
-- greenhouse-io-candidates-api-openapi.yml
+- greenhouse-candidates-api-openapi.yml

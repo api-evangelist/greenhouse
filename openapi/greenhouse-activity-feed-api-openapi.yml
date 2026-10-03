@@ -44,20 +44,6 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
     ActivityFeed:
       type: object
       properties:
@@ -85,6 +71,20 @@ components:
           type: array
           items:
             type: object
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     UserRef:
       type: object
       nullable: true

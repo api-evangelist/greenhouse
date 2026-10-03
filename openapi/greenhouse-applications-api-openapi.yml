@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Greenhouse Applications API
   version: '1.0'
-  description: 'Operations tagged Applications across 2 of this provider''s published API definitions: greenhouse-harvest-openapi.yml, greenhouse-io-applications-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Applications across 2 of this provider''s published API definitions: greenhouse-harvest-openapi.yml, greenhouse-applications-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://harvest.greenhouse.io/v1
   description: Production
@@ -377,18 +377,18 @@ components:
       schema:
         type: integer
         default: 100
-    Id:
-      in: path
-      name: id
-      required: true
-      schema:
-        type: integer
     Page:
       in: query
       name: page
       schema:
         type: integer
         default: 1
+    Id:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: integer
     OnBehalfOf:
       name: On-Behalf-Of
       in: header
@@ -396,6 +396,13 @@ components:
       description: The ID of the Greenhouse user the request is being made on behalf of.
       schema:
         type: integer
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -411,32 +418,21 @@ components:
                 type: string
               message:
                 type: string
-    Attachment:
+    UserRef:
       type: object
-      required:
-      - filename
-      - type
+      nullable: true
       properties:
-        filename:
+        id:
+          type: integer
+        first_name:
           type: string
-        url:
+        last_name:
           type: string
-          format: uri
-        type:
+        name:
           type: string
-          enum:
-          - resume
-          - cover_letter
-          - admin_only
-          - public
-          - offer_letter
-          - take_home_test
-          - offer_packet
-        content:
+        employee_id:
           type: string
-          description: Base64 file content.
-        content_type:
-          type: string
+          nullable: true
     ApplicationSubmission:
       type: object
       required:
@@ -501,6 +497,32 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Attachment'
+    Attachment:
+      type: object
+      required:
+      - filename
+      - type
+      properties:
+        filename:
+          type: string
+        url:
+          type: string
+          format: uri
+        type:
+          type: string
+          enum:
+          - resume
+          - cover_letter
+          - admin_only
+          - public
+          - offer_letter
+          - take_home_test
+          - offer_packet
+        content:
+          type: string
+          description: Base64 file content.
+        content_type:
+          type: string
     Application:
       type: object
       properties:
@@ -583,28 +605,6 @@ components:
         custom_fields:
           type: object
           additionalProperties: true
-    UserRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        first_name:
-          type: string
-        last_name:
-          type: string
-        name:
-          type: string
-        employee_id:
-          type: string
-          nullable: true
-  responses:
-    ErrorResponse:
-      description: Error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http
@@ -615,4 +615,4 @@ components:
       description: HTTP Basic with the Harvest API key as the username and an empty password (Base64 encoded).
 x-refined-from:
 - greenhouse-harvest-openapi.yml
-- greenhouse-io-applications-api-openapi.yml
+- greenhouse-applications-api-openapi.yml

@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Greenhouse Users API
   version: '1.0'
-  description: 'Operations tagged Users across 3 of this provider''s published API definitions: greenhouse-harvest-openapi.yml, greenhouse-ingestion-openapi.yml, greenhouse-io-users-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Users across 3 of this provider''s published API definitions: greenhouse-harvest-openapi.yml, greenhouse-ingestion-openapi.yml, greenhouse-users-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://harvest.greenhouse.io/v1
   description: Production
@@ -139,20 +139,6 @@ components:
       schema:
         type: integer
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
     User:
       type: object
       properties:
@@ -189,6 +175,20 @@ components:
           type: array
           items:
             type: integer
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
   responses:
     ErrorResponse:
       description: Error response.
@@ -226,4 +226,4 @@ components:
 x-refined-from:
 - greenhouse-harvest-openapi.yml
 - greenhouse-ingestion-openapi.yml
-- greenhouse-io-users-api-openapi.yml
+- greenhouse-users-api-openapi.yml

@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Greenhouse Departments API
   version: '1.0'
-  description: 'Operations tagged Departments across 3 of this provider''s published API definitions: greenhouse-harvest-openapi.yml, greenhouse-job-board-openapi.yml, greenhouse-io-departments-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Departments across 3 of this provider''s published API definitions: greenhouse-harvest-openapi.yml, greenhouse-job-board-openapi.yml, greenhouse-departments-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://harvest.greenhouse.io/v1
   description: Production
@@ -116,6 +116,27 @@ paths:
       security:
       - BasicAuth: []
 components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -151,27 +172,6 @@ components:
         external_id:
           type: string
           nullable: true
-  parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-    OnBehalfOf:
-      name: On-Behalf-Of
-      in: header
-      required: false
-      description: The ID of the Greenhouse user the request is being made on behalf of.
-      schema:
-        type: integer
-  responses:
-    ErrorResponse:
-      description: Error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http
@@ -183,4 +183,4 @@ components:
 x-refined-from:
 - greenhouse-harvest-openapi.yml
 - greenhouse-job-board-openapi.yml
-- greenhouse-io-departments-api-openapi.yml
+- greenhouse-departments-api-openapi.yml
