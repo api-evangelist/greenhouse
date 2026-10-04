@@ -243,12 +243,6 @@ paths:
       - BasicAuth: []
 components:
   parameters:
-    PerPage:
-      in: query
-      name: per_page
-      schema:
-        type: integer
-        default: 100
     Page:
       in: query
       name: page
@@ -261,6 +255,12 @@ components:
       required: true
       schema:
         type: integer
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        default: 100
     OnBehalfOf_2:
       name: On-Behalf-Of
       in: header
@@ -269,6 +269,63 @@ components:
       schema:
         type: integer
   schemas:
+    UserRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        first_name:
+          type: string
+        last_name:
+          type: string
+        name:
+          type: string
+        employee_id:
+          type: string
+          nullable: true
+    Office:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        location:
+          type: object
+          properties:
+            name:
+              type: string
+        parent_id:
+          type: integer
+          nullable: true
+        child_ids:
+          type: array
+          items:
+            type: integer
+        external_id:
+          type: string
+          nullable: true
+    Department:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        parent_id:
+          type: integer
+          nullable: true
+        parent_department_external_id:
+          type: string
+          nullable: true
+        child_ids:
+          type: array
+          items:
+            type: integer
+        external_id:
+          type: string
+          nullable: true
     Opening:
       type: object
       properties:
@@ -302,116 +359,6 @@ components:
         custom_fields:
           type: object
           additionalProperties: true
-    HiringTeam:
-      type: object
-      properties:
-        hiring_managers:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserRef'
-        recruiters:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserRef'
-        coordinators:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserRef'
-        sourcers:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserRef'
-    Office:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        location:
-          type: object
-          properties:
-            name:
-              type: string
-        parent_id:
-          type: integer
-          nullable: true
-        child_ids:
-          type: array
-          items:
-            type: integer
-        external_id:
-          type: string
-          nullable: true
-    JobCreate:
-      type: object
-      required:
-      - name
-      - template_job_id
-      properties:
-        name:
-          type: string
-        template_job_id:
-          type: integer
-        requisition_id:
-          type: string
-        department_id:
-          type: integer
-        office_ids:
-          type: array
-          items:
-            type: integer
-        number_of_openings:
-          type: integer
-    UserRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        first_name:
-          type: string
-        last_name:
-          type: string
-        name:
-          type: string
-        employee_id:
-          type: string
-          nullable: true
-    Department:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        parent_id:
-          type: integer
-          nullable: true
-        parent_department_external_id:
-          type: string
-          nullable: true
-        child_ids:
-          type: array
-          items:
-            type: integer
-        external_id:
-          type: string
-          nullable: true
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
     Job:
       type: object
       properties:
@@ -463,6 +410,59 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Opening'
+    JobCreate:
+      type: object
+      required:
+      - name
+      - template_job_id
+      properties:
+        name:
+          type: string
+        template_job_id:
+          type: integer
+        requisition_id:
+          type: string
+        department_id:
+          type: integer
+        office_ids:
+          type: array
+          items:
+            type: integer
+        number_of_openings:
+          type: integer
+    HiringTeam:
+      type: object
+      properties:
+        hiring_managers:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRef'
+        recruiters:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRef'
+        coordinators:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRef'
+        sourcers:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRef'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
   responses:
     ErrorResponse:
       description: Error response.

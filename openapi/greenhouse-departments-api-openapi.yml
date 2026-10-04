@@ -117,17 +117,17 @@ paths:
       - BasicAuth: []
 components:
   parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
     OnBehalfOf:
       name: On-Behalf-Of
       in: header
       required: false
       description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+    Id:
+      name: id
+      in: path
+      required: true
       schema:
         type: integer
   responses:
@@ -138,20 +138,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
     Department:
       type: object
       properties:
@@ -172,6 +158,20 @@ components:
         external_id:
           type: string
           nullable: true
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
   securitySchemes:
     basicAuth:
       type: http

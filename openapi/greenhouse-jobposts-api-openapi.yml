@@ -187,6 +187,13 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
 components:
   parameters:
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
     PerPage:
       name: per_page
       in: query
@@ -195,25 +202,25 @@ components:
         type: integer
         default: 100
         maximum: 500
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-    OnBehalfOf:
-      name: On-Behalf-Of
-      in: header
-      required: false
-      description: The ID of the Greenhouse user the request is being made on behalf of.
-      schema:
-        type: integer
     Page:
       name: page
       in: query
       schema:
         type: integer
         default: 1
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     JobPost:
       type: object
@@ -257,13 +264,6 @@ components:
                 type: string
               message:
                 type: string
-  responses:
-    ErrorResponse:
-      description: Error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     BasicAuth:
       type: http

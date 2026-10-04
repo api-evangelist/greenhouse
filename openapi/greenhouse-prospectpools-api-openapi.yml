@@ -46,6 +46,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
   schemas:
     Error:
       type: object
@@ -79,13 +86,6 @@ components:
                 type: string
               priority:
                 type: integer
-  parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
   securitySchemes:
     OAuth2:
       type: oauth2

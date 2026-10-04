@@ -83,6 +83,21 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
 components:
   schemas:
+    UserRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        first_name:
+          type: string
+        last_name:
+          type: string
+        name:
+          type: string
+        employee_id:
+          type: string
+          nullable: true
     Scorecard:
       type: object
       properties:
@@ -142,21 +157,13 @@ components:
                 type: string
               message:
                 type: string
-    UserRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        first_name:
-          type: string
-        last_name:
-          type: string
-        name:
-          type: string
-        employee_id:
-          type: string
-          nullable: true
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     PerPage:
       name: per_page
@@ -166,25 +173,18 @@ components:
         type: integer
         default: 100
         maximum: 500
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
     Page:
       name: page
       in: query
       schema:
         type: integer
         default: 1
-  responses:
-    ErrorResponse:
-      description: Error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
   securitySchemes:
     BasicAuth:
       type: http

@@ -90,6 +90,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
   schemas:
     JobStage:
       type: object
@@ -129,13 +136,6 @@ components:
                 type: string
               message:
                 type: string
-  parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
   securitySchemes:
     BasicAuth:
       type: http

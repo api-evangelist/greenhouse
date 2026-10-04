@@ -132,6 +132,13 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
 components:
   parameters:
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
     PerPage:
       name: per_page
       in: query
@@ -140,25 +147,18 @@ components:
         type: integer
         default: 100
         maximum: 500
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-    OnBehalfOf:
-      name: On-Behalf-Of
-      in: header
-      required: false
-      description: The ID of the Greenhouse user the request is being made on behalf of.
-      schema:
-        type: integer
     Page:
       name: page
       in: query
       schema:
         type: integer
         default: 1
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
   schemas:
     Offer:
       type: object

@@ -184,6 +184,18 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
 components:
   schemas:
+    CustomFieldOption:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        priority:
+          type: integer
+        external_id:
+          type: string
+          nullable: true
     CustomField:
       type: object
       properties:
@@ -241,30 +253,18 @@ components:
                 type: string
               message:
                 type: string
-    CustomFieldOption:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        priority:
-          type: integer
-        external_id:
-          type: string
-          nullable: true
   parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
     OnBehalfOf:
       name: On-Behalf-Of
       in: header
       required: false
       description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+    Id:
+      name: id
+      in: path
+      required: true
       schema:
         type: integer
   responses:
