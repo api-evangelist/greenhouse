@@ -464,6 +464,8 @@ apis:
   humanURL: https://developers.greenhouse.io/assessment.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
@@ -560,6 +562,8 @@ apis:
   humanURL: https://developers.greenhouse.io/assessment.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -704,6 +708,8 @@ apis:
   humanURL: https://developers.greenhouse.io/assessment.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
+  - Job Posts
+  tags_raw:
   - JobPosts
   properties:
   - type: OpenAPI
@@ -1179,6 +1185,9 @@ apis:
   - type: Documentation
     url: https://developers.greenhouse.io/assessment.html
 common:
+- type: CapabilityMap
+  url: capabilities/greenhouse-capability-edges.yml
+  name: Greenhouse Business Capability Map
 - type: Website
   url: https://www.greenhouse.com
 - type: AgenticAccess
