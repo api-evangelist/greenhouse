@@ -1,0 +1,184 @@
+slug: greenhouse
+provider: Greenhouse
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 17
+edges:
+- tag: Applications
+  spec_file: greenhouse-applications-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.95
+  evidence: POST /applications/{id}/hire  Hire application; POST /applications/{id}/reject  Reject application;
+    POST /applications/{id}/advance  Advance application
+  reason: Job application lifecycle — advance, hire, reject, transfer to job — is core recruiting/hiring,
+    squarely Talent Acquisition Management.
+- tag: Candidates
+  spec_file: greenhouse-candidates-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.95
+  evidence: POST /candidates  Create candidate; POST /candidates/{id}/attachments  Add Candidate Attachment;
+    POST /candidates/{id}/employment  Add Candidate Employment
+  reason: Candidate records with education, employment history and resumes in an ATS are the sourcing/recruiting
+    data core of Talent Acquisition Management.
+- tag: ScheduledInterviews
+  spec_file: greenhouse-scheduledinterviews-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.95
+  evidence: POST /scheduled_interviews 'Create Scheduled Interview'; GET /applications/{id}/scheduled_interviews
+    'List Application Scheduled Interviews'
+  reason: Interview scheduling against candidate applications is unambiguously recruiting execution —
+    Talent Acquisition Management.
+- tag: Jobs
+  spec_file: greenhouse-jobs-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.93
+  evidence: POST /jobs 'Create Job'; POST /jobs/{job_id} 'Submit application'; PUT /jobs/{id}/hiring_team
+    'Replace Job Hiring Team'; schemas 'HiringTeam', 'JobCreate'
+  reason: Requisition creation, hiring team composition and application submission are recruiting/hiring
+    operations in an ATS.
+- tag: JobPosts
+  spec_file: greenhouse-jobposts-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.92
+  evidence: GET /job_posts 'List Job Posts'; PATCH /job_posts/{id}/status 'Update Job Post Status'; GET
+    /job_posts/{id}/custom_locations
+  reason: Job posts are the published advertisements for open roles in an ATS — job posting/sourcing,
+    squarely Talent Acquisition Management.
+- tag: Job Openings
+  spec_file: greenhouse-job-openings-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.9
+  evidence: 'GET /openings listOpenings ''List Openings''; POST /openings ''Create Opening''; schema ''Opening''
+    within Greenhouse''s ''primary REST API for programmatic access to recruiting data: candidates, applications,
+    jobs, openings'''
+  reason: Job openings (requisition slots) managed in an applicant tracking system are core recruiting/hiring
+    lifecycle objects, i.e. Talent Acquisition Management.
+- tag: Job stages
+  spec_file: greenhouse-job-stages-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.9
+  evidence: GET /job_stages 'List Job Stages'; GET /jobs/{job_id}/stages 'List Job Stages For Job'; schema
+    'JobStage'
+  reason: Job stages define the stages of the hiring pipeline for a job in an ATS — recruiting process
+    structure, hence Talent Acquisition Management.
+- tag: Scorecards
+  spec_file: greenhouse-scorecards-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.9
+  evidence: GET /scorecards 'List Scorecards'; GET /applications/{id}/scorecards 'List Application Scorecards';
+    schema 'Scorecard'
+  reason: Interview scorecards record interviewer evaluations of candidate applications — candidate assessment
+    within Talent Acquisition Management, not employee performance management.
+- tag: Offers
+  spec_file: greenhouse-offers-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.88
+  evidence: GET /offers 'List Offers'; PATCH /offers/{id}/current 'Update Current Offer'; GET /applications/{id}/offers
+    'List Application Offers'
+  reason: Offers attached to candidate applications are the offer stage of the hiring process, part of
+    Talent Acquisition Management rather than ongoing compensation administration.
+- tag: TestDelivery
+  spec_file: greenhouse-testdelivery-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.85
+  evidence: POST /send_test "Send Test To Candidate"; "assessment vendors implement so Greenhouse can
+    list available tests, send a test to a candidate, and retrieve the candidate's results"
+  reason: Pre-hire assessment delivery and result retrieval for candidates is squarely part of recruiting/selection,
+    i.e. Talent Acquisition Management, not generic learning or quality testing.
+- tag: RejectionReasons
+  spec_file: greenhouse-rejectionreasons-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.82
+  evidence: GET /rejection_reasons 'List Rejection Reasons' in the Harvest API for 'candidates, applications,
+    jobs'
+  reason: Rejection reasons are candidate-disposition reference data in the recruiting pipeline, supporting
+    Talent Acquisition Management.
+- tag: Activity Feed
+  spec_file: greenhouse-activity-feed-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.8
+  evidence: GET /candidates/{id}/activity_feed  getCandidateActivityFeed  List Candidate Activity Feed
+  reason: Candidate activity history within an applicant tracking system directly supports recruiting/hiring
+    lifecycle tracking, i.e. Talent Acquisition Management.
+- tag: ProspectPools
+  spec_file: greenhouse-prospectpools-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.8
+  evidence: GET /prospect_pools/{id} 'Retrieve Prospect Pool'; schema 'ProspectPool' in the 'candidate-ingestion-api'
+  reason: Prospect pools organise sourced prospects submitted by sourcing partners — candidate sourcing
+    within Talent Acquisition Management.
+- tag: Prospects
+  spec_file: greenhouse-prospects-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.8
+  evidence: '''The Ingestion API enables sourcing partners to submit prospects and candidates to Greenhouse'';
+    GET /prospect_pools ''List prospect pools'''
+  reason: Prospect ingestion from sourcing partners is candidate sourcing, part of Talent Acquisition
+    Management.
+- tag: Tests
+  spec_file: greenhouse-tests-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.8
+  evidence: GET /list_tests listPartnerTests "List Partner Tests"; schema PartnerTest; "so Greenhouse
+    can list available tests, send a test to a candidate"
+  reason: Catalogue of candidate assessment tests offered by an assessment partner, used in the hiring
+    selection process — Talent Acquisition Management. Single read operation limits specificity slightly.
+- tag: Approvals
+  spec_file: greenhouse-approvals-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.75
+  evidence: GET /jobs/{job_id}/approval_flows  listJobApprovalFlows  List Job Approval Flows; PUT /approval_flows/{id}/approval_groups/{group_id}/approvers/{user_id}  Replace
+    Approver
+  reason: Approval flows are scoped to jobs and offers within the recruiting process (job requisition/offer
+    approvals), part of the hiring workflow rather than a generic workflow capability.
+- tag: Greenhouse Job Board API
+  spec_file: greenhouse-greenhouse-job-board-api-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.7
+  evidence: GET /  getRoot  Retrieve job board — "The Job Board API enables building careers pages with
+    custom look and feel"
+  reason: Retrieving the public job board that powers a careers page is job posting/candidate sourcing,
+    part of Talent Acquisition. Only a single root operation, so moderate confidence.
