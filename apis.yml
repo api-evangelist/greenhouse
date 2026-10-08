@@ -1185,6 +1185,12 @@ apis:
   - type: Documentation
     url: https://developers.greenhouse.io/assessment.html
 common:
+- type: Plans
+  url: plans/greenhouse-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/greenhouse-rate-limits.yml
+- type: FinOps
+  url: finops/greenhouse-finops.yml
 - url: https://www.greenhouse.com/blog
   type: Blog
 - type: CapabilityMap
