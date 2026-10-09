@@ -4,16 +4,18 @@
 front_door_ai:
   slug: greenhouse
   lexicon_version: '1.0'
-  probed_at: '2026-09-17'
-  host: greenhouse.io
+  probed_at: '2026-09-25'
+  host: www.greenhouse.com
   final_host: www.greenhouse.com
   ownership: own
   owner: greenhouse
-  shares_host_with:
-  - greenhouse-io
+  shares_host_with: null
   inherited_from: null
+  alias_of: null
   verdict: scored
   score: 12
+  band: 5
+  band_label: prominent
   host_score: 12
   density: 17.52
   words: 685
