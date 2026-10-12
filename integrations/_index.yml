@@ -82,7 +82,6 @@
   arazzo: null
 - slug: greenhouse-agora
   label: Agora
-  partner: agora
   partner_name: Agora
   type: marketplace
   marketplace: own
@@ -360,7 +359,6 @@
   arazzo: null
 - slug: greenhouse-bamboohr
   label: BambooHR
-  partner: bamboohr
   partner_name: BambooHR
   type: marketplace
   marketplace: own
@@ -450,7 +448,6 @@
   arazzo: null
 - slug: greenhouse-bob
   label: Bob
-  partner: bob
   partner_name: Bob
   type: marketplace
   marketplace: own
@@ -585,7 +582,6 @@
   arazzo: null
 - slug: greenhouse-calendly
   label: Calendly
-  partner: calendly
   partner_name: Calendly
   type: marketplace
   marketplace: own
@@ -787,7 +783,6 @@
   arazzo: null
 - slug: greenhouse-checkr
   label: Checkr
-  partner: checkr
   partner_name: Checkr
   type: marketplace
   marketplace: own
@@ -1092,7 +1087,6 @@
   arazzo: null
 - slug: greenhouse-datadog
   label: Datadog
-  partner: datadog
   partner_name: Datadog
   type: marketplace
   marketplace: own
@@ -1170,7 +1164,6 @@
   arazzo: null
 - slug: greenhouse-docusign
   label: Docusign
-  partner: docusign
   partner_name: Docusign
   type: marketplace
   marketplace: own
@@ -1594,7 +1587,6 @@
   arazzo: null
 - slug: greenhouse-google-calendar
   label: Google Calendar
-  partner: google-calendar
   partner_name: Google Calendar
   type: marketplace
   marketplace: own
@@ -1606,7 +1598,6 @@
   arazzo: null
 - slug: greenhouse-google-meet
   label: Google Meet
-  partner: google-meet
   partner_name: Google Meet
   type: marketplace
   marketplace: own
@@ -1721,7 +1712,6 @@
   arazzo: null
 - slug: greenhouse-harver
   label: Harver
-  partner: harver
   partner_name: Harver
   type: marketplace
   marketplace: own
@@ -2087,7 +2077,6 @@
   arazzo: null
 - slug: greenhouse-indeed
   label: Indeed
-  partner: indeed
   partner_name: Indeed
   type: marketplace
   marketplace: own
@@ -2591,7 +2580,6 @@
   arazzo: null
 - slug: greenhouse-microsoft-teams
   label: Microsoft Teams
-  partner: microsoft-teams
   partner_name: Microsoft Teams
   type: marketplace
   marketplace: own
@@ -2802,7 +2790,6 @@
   arazzo: null
 - slug: greenhouse-okta
   label: Okta
-  partner: okta
   partner_name: Okta
   type: marketplace
   marketplace: own
@@ -2904,7 +2891,6 @@
   arazzo: null
 - slug: greenhouse-paradox
   label: Paradox
-  partner: paradox
   partner_name: Paradox
   type: marketplace
   marketplace: own
@@ -3464,7 +3450,6 @@
   arazzo: null
 - slug: greenhouse-rippling
   label: Rippling
-  partner: rippling
   partner_name: Rippling
   type: marketplace
   marketplace: own
@@ -3498,7 +3483,6 @@
   arazzo: null
 - slug: greenhouse-linkedin
   label: LinkedIn
-  partner: linkedin
   partner_name: LinkedIn
   type: marketplace
   marketplace: own
@@ -3632,7 +3616,6 @@
   arazzo: null
 - slug: greenhouse-slack
   label: Slack
-  partner: slack
   partner_name: Slack
   type: marketplace
   marketplace: own
@@ -3666,7 +3649,6 @@
   arazzo: null
 - slug: greenhouse-spark-hire
   label: Spark Hire
-  partner: spark-hire
   partner_name: Spark Hire
   type: marketplace
   marketplace: own
@@ -4122,7 +4104,6 @@
   arazzo: null
 - slug: greenhouse-ukg-pro
   label: UKG Pro
-  partner: ukg-pro
   partner_name: UKG Pro
   type: marketplace
   marketplace: own
@@ -4134,7 +4115,6 @@
   arazzo: null
 - slug: greenhouse-ukg-ready
   label: UKG Ready
-  partner: ukg-ready
   partner_name: UKG Ready
   type: marketplace
   marketplace: own
@@ -4425,7 +4405,6 @@
   arazzo: null
 - slug: greenhouse-workato
   label: Workato
-  partner: workato
   partner_name: Workato
   type: marketplace
   marketplace: own
@@ -4582,7 +4561,6 @@
   arazzo: null
 - slug: greenhouse-zoom
   label: Zoom
-  partner: zoom
   partner_name: Zoom
   type: marketplace
   marketplace: own
