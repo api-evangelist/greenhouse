@@ -1,6 +1,7 @@
 generated: '2026-10-12'
 method: searched
 checked:
+- docusign/integrations/docusign-integration-edges.yml
 - https://integrations.greenhouse.com/
 marketplace_apps:
 - marketplace: own
@@ -6776,3 +6777,22 @@ edges:
   partner_domain: zythr.com
   detected_by: sweep-hr-stores.py
   detected: '2026-10-12'
+- partner_name: Docusign (partner-store)
+  partner: docusign
+  partner_match: mirror
+  mirror_match: domain+verified
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: partner-store
+  evidence: https://support.greenhouse.io/hc/en-us/articles/205633569-Docusign-integration
+  mirror_of: docusign/integrations/docusign-integration-edges.yml
+  apps:
+  - eSignature for Greenhouse
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Integrations
+source:
+- docusign/integrations/docusign-integration-edges.yml

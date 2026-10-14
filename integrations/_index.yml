@@ -4592,3 +4592,16 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: greenhouse-docusign-partner-store
+  label: Docusign (partner-store)
+  partner: docusign
+  partner_name: Docusign (partner-store)
+  category: Integrations
+  type: marketplace
+  marketplace: partner-store
+  channel: partner-built
+  evidence: https://support.greenhouse.io/hc/en-us/articles/205633569-Docusign-integration
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
