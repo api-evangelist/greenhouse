@@ -83,21 +83,21 @@ paths:
         4XX:
           $ref: '#/components/responses/ErrorResponse'
 components:
-  responses:
-    ErrorResponse:
-      description: Error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     JobStage:
       type: object
       properties:
@@ -122,20 +122,20 @@ components:
                 type: integer
               name:
                 type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
   securitySchemes:
     BasicAuth:
       type: http

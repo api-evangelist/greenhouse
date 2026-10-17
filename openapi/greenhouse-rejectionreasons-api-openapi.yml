@@ -55,13 +55,6 @@ paths:
         4XX:
           $ref: '#/components/responses/ErrorResponse'
 components:
-  responses:
-    ErrorResponse:
-      description: Error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -77,6 +70,13 @@ components:
                 type: string
               message:
                 type: string
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     BasicAuth:
       type: http

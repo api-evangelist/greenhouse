@@ -371,24 +371,24 @@ paths:
                     type: string
 components:
   parameters:
-    Page:
-      in: query
-      name: page
-      schema:
-        type: integer
-        default: 1
-    Id:
-      in: path
-      name: id
-      required: true
-      schema:
-        type: integer
     PerPage:
       in: query
       name: per_page
       schema:
         type: integer
         default: 100
+    Id:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        default: 1
     OnBehalfOf:
       name: On-Behalf-Of
       in: header
@@ -396,6 +396,13 @@ components:
       description: The ID of the Greenhouse user the request is being made on behalf of.
       schema:
         type: integer
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Application:
       type: object
@@ -479,6 +486,20 @@ components:
         custom_fields:
           type: object
           additionalProperties: true
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     UserRef:
       type: object
       nullable: true
@@ -494,58 +515,6 @@ components:
         employee_id:
           type: string
           nullable: true
-    Attachment:
-      type: object
-      required:
-      - filename
-      - type
-      properties:
-        filename:
-          type: string
-        url:
-          type: string
-          format: uri
-        type:
-          type: string
-          enum:
-          - resume
-          - cover_letter
-          - admin_only
-          - public
-          - offer_letter
-          - take_home_test
-          - offer_packet
-        content:
-          type: string
-          description: Base64 file content.
-        content_type:
-          type: string
-    ApplicationCreate:
-      type: object
-      required:
-      - job_id
-      properties:
-        job_id:
-          type: integer
-        source_id:
-          type: integer
-        initial_stage_id:
-          type: integer
-        referrer:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - outside
-              - id
-              - email
-            value:
-              type: string
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/Attachment'
     ApplicationSubmission:
       type: object
       required:
@@ -584,27 +553,58 @@ components:
         question_id:
           type: string
           description: Greenhouse-defined custom question identifiers; multiple entries allowed.
-    Error:
+    ApplicationCreate:
       type: object
+      required:
+      - job_id
       properties:
-        message:
-          type: string
-        errors:
+        job_id:
+          type: integer
+        source_id:
+          type: integer
+        initial_stage_id:
+          type: integer
+        referrer:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - outside
+              - id
+              - email
+            value:
+              type: string
+        attachments:
           type: array
           items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-  responses:
-    ErrorResponse:
-      description: Error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/Attachment'
+    Attachment:
+      type: object
+      required:
+      - filename
+      - type
+      properties:
+        filename:
+          type: string
+        url:
+          type: string
+          format: uri
+        type:
+          type: string
+          enum:
+          - resume
+          - cover_letter
+          - admin_only
+          - public
+          - offer_letter
+          - take_home_test
+          - offer_packet
+        content:
+          type: string
+          description: Base64 file content.
+        content_type:
+          type: string
   securitySchemes:
     basicAuth:
       type: http

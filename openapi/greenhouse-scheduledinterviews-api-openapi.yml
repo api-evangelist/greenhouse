@@ -156,18 +156,18 @@ components:
         type: integer
         default: 100
         maximum: 500
-    Page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
     Id:
       name: id
       in: path
       required: true
       schema:
         type: integer
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
   responses:
     ErrorResponse:
       description: Error response.
@@ -176,6 +176,20 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     ScheduledInterview:
       type: object
       properties:
@@ -223,20 +237,6 @@ components:
                 - accepted
                 - declined
                 - tentative
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
   securitySchemes:
     BasicAuth:
       type: http

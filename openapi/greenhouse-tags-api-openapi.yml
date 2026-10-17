@@ -137,28 +137,6 @@ paths:
         4XX:
           $ref: '#/components/responses/ErrorResponse'
 components:
-  schemas:
-    Tag:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
   parameters:
     OnBehalfOf:
       name: On-Behalf-Of
@@ -180,6 +158,28 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    Tag:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
   securitySchemes:
     BasicAuth:
       type: http

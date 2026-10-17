@@ -82,7 +82,49 @@ paths:
         4XX:
           $ref: '#/components/responses/ErrorResponse'
 components:
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    PerPage:
+      name: per_page
+      in: query
+      description: Default 100, max 500.
+      schema:
+        type: integer
+        default: 100
+        maximum: 500
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     UserRef:
       type: object
       nullable: true
@@ -143,48 +185,6 @@ components:
                 type: string
               answer:
                 type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-  responses:
-    ErrorResponse:
-      description: Error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    PerPage:
-      name: per_page
-      in: query
-      description: Default 100, max 500.
-      schema:
-        type: integer
-        default: 100
-        maximum: 500
-    Page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
   securitySchemes:
     BasicAuth:
       type: http

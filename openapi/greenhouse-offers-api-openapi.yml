@@ -147,18 +147,25 @@ components:
         type: integer
         default: 100
         maximum: 500
-    Page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
     Id:
       name: id
       in: path
       required: true
       schema:
         type: integer
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Offer:
       type: object
@@ -208,13 +215,6 @@ components:
                 type: string
               message:
                 type: string
-  responses:
-    ErrorResponse:
-      description: Error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     BasicAuth:
       type: http

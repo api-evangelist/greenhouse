@@ -368,24 +368,24 @@ paths:
       - BasicAuth: []
 components:
   parameters:
-    Page:
-      in: query
-      name: page
-      schema:
-        type: integer
-        default: 1
-    Id:
-      in: path
-      name: id
-      required: true
-      schema:
-        type: integer
     PerPage:
       in: query
       name: per_page
       schema:
         type: integer
         default: 100
+    Id:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        default: 1
     OnBehalfOf_2:
       name: On-Behalf-Of
       in: header
@@ -393,7 +393,43 @@ components:
       description: The ID of the Greenhouse user the request is being made on behalf of.
       schema:
         type: integer
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    Education:
+      type: object
+      properties:
+        school_name:
+          type: string
+        degree:
+          type: string
+        discipline:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
     Employment:
       type: object
       properties:
@@ -433,42 +469,6 @@ components:
           description: Base64 file content.
         content_type:
           type: string
-    Education:
-      type: object
-      properties:
-        school_name:
-          type: string
-        degree:
-          type: string
-        discipline:
-          type: string
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-  responses:
-    ErrorResponse:
-      description: Error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http

@@ -243,24 +243,24 @@ paths:
       - BasicAuth: []
 components:
   parameters:
-    Page:
-      in: query
-      name: page
-      schema:
-        type: integer
-        default: 1
-    Id:
-      in: path
-      name: id
-      required: true
-      schema:
-        type: integer
     PerPage:
       in: query
       name: per_page
       schema:
         type: integer
         default: 100
+    Id:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        default: 1
     OnBehalfOf_2:
       name: On-Behalf-Of
       in: header
@@ -269,6 +269,72 @@ components:
       schema:
         type: integer
   schemas:
+    HiringTeam:
+      type: object
+      properties:
+        hiring_managers:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRef'
+        recruiters:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRef'
+        coordinators:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRef'
+        sourcers:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRef'
+    Opening:
+      type: object
+      properties:
+        id:
+          type: integer
+        opening_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - open
+          - closed
+        opened_at:
+          type: string
+          format: date-time
+        closed_at:
+          type: string
+          format: date-time
+          nullable: true
+        application_id:
+          type: integer
+          nullable: true
+        close_reason:
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        custom_fields:
+          type: object
+          additionalProperties: true
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     UserRef:
       type: object
       nullable: true
@@ -306,59 +372,6 @@ components:
         external_id:
           type: string
           nullable: true
-    Department:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        parent_id:
-          type: integer
-          nullable: true
-        parent_department_external_id:
-          type: string
-          nullable: true
-        child_ids:
-          type: array
-          items:
-            type: integer
-        external_id:
-          type: string
-          nullable: true
-    Opening:
-      type: object
-      properties:
-        id:
-          type: integer
-        opening_id:
-          type: string
-        status:
-          type: string
-          enum:
-          - open
-          - closed
-        opened_at:
-          type: string
-          format: date-time
-        closed_at:
-          type: string
-          format: date-time
-          nullable: true
-        application_id:
-          type: integer
-          nullable: true
-        close_reason:
-          type: object
-          nullable: true
-          properties:
-            id:
-              type: integer
-            name:
-              type: string
-        custom_fields:
-          type: object
-          additionalProperties: true
     Job:
       type: object
       properties:
@@ -430,39 +443,26 @@ components:
             type: integer
         number_of_openings:
           type: integer
-    HiringTeam:
+    Department:
       type: object
       properties:
-        hiring_managers:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserRef'
-        recruiters:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserRef'
-        coordinators:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserRef'
-        sourcers:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserRef'
-    Error:
-      type: object
-      properties:
-        message:
+        id:
+          type: integer
+        name:
           type: string
-        errors:
+        parent_id:
+          type: integer
+          nullable: true
+        parent_department_external_id:
+          type: string
+          nullable: true
+        child_ids:
           type: array
           items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
+            type: integer
+        external_id:
+          type: string
+          nullable: true
   responses:
     ErrorResponse:
       description: Error response.

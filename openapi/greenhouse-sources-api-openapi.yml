@@ -43,28 +43,7 @@ paths:
         4XX:
           $ref: '#/components/responses/ErrorResponse'
 components:
-  responses:
-    ErrorResponse:
-      description: Error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Source:
-      type: object
-      properties:
-        id:
-          type: integer
-        type:
-          type: object
-          properties:
-            id:
-              type: integer
-            name:
-              type: string
-        name:
-          type: string
     Error:
       type: object
       properties:
@@ -79,6 +58,27 @@ components:
                 type: string
               message:
                 type: string
+    Source:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        name:
+          type: string
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     BasicAuth:
       type: http

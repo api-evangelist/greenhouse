@@ -138,6 +138,20 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     Department:
       type: object
       properties:
@@ -158,20 +172,6 @@ components:
         external_id:
           type: string
           nullable: true
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
   securitySchemes:
     basicAuth:
       type: http

@@ -183,7 +183,42 @@ paths:
         4XX:
           $ref: '#/components/responses/ErrorResponse'
 components:
+  parameters:
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     CustomFieldOption:
       type: object
       properties:
@@ -239,41 +274,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CustomFieldOption'
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-  parameters:
-    OnBehalfOf:
-      name: On-Behalf-Of
-      in: header
-      required: false
-      description: The ID of the Greenhouse user the request is being made on behalf of.
-      schema:
-        type: integer
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-  responses:
-    ErrorResponse:
-      description: Error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     BasicAuth:
       type: http
