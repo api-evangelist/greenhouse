@@ -612,6 +612,8 @@ apis:
   humanURL: https://developers.greenhouse.io/assessment.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
+  - Job Postings
+  tags_raw:
   - Job Openings
   properties:
   - type: OpenAPI
